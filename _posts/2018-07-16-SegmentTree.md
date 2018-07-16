@@ -3,7 +3,7 @@ layout: default
 title: "线段树模板"
 date: 2018-07-16
 category: [Template,Segment Tree]
-tags: [模板]
+tags: [模板,线段树]
 ---
 
 # 线段树模板
