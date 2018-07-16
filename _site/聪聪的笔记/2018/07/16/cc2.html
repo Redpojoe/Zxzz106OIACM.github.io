@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=" media="screen" type="text/css">
+    <link rel="stylesheet" href="/assets/css/print.css" media="print" type="text/css">
+    <link rel="icon" href="https://avatars1.githubusercontent.com/u/21288752?s=40&amp;v=4" type="image/x-icon">
+    <style type="text/css">
+      a{text-decoration: none; padding: 10PX; color:#6633FF}
+      a:hover{ color:#6633FF;}
+      li{list-style:none}
+    </style>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>The Race | GYS’s Blog for OI/ACM</title>
+<meta name="generator" content="Jekyll v3.8.3" />
+<meta property="og:title" content="The Race" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The Race &lt;p align=&quot;right&quot;&gt;来源：POJ-2274&lt;p&gt; 题目： 给出n(n&lt;=250000)辆赛车，i赛车初始在xi(xi从小到大给出)，速度为vi，赛车在比赛时会发生超车（不会相撞）。求超车次数%1000000，并输出前10000次(不足10000次有几次输出几次)超车，格式为x y，表示x超过y，时间靠前的先输出，时间相同位置靠前的先输出，保证没有时间相同位置也相同的超车。" />
+<meta property="og:description" content="The Race &lt;p align=&quot;right&quot;&gt;来源：POJ-2274&lt;p&gt; 题目： 给出n(n&lt;=250000)辆赛车，i赛车初始在xi(xi从小到大给出)，速度为vi，赛车在比赛时会发生超车（不会相撞）。求超车次数%1000000，并输出前10000次(不足10000次有几次输出几次)超车，格式为x y，表示x超过y，时间靠前的先输出，时间相同位置靠前的先输出，保证没有时间相同位置也相同的超车。" />
+<link rel="canonical" href="http://localhost:4000/%E8%81%AA%E8%81%AA%E7%9A%84%E7%AC%94%E8%AE%B0/2018/07/16/cc2.html" />
+<meta property="og:url" content="http://localhost:4000/%E8%81%AA%E8%81%AA%E7%9A%84%E7%AC%94%E8%AE%B0/2018/07/16/cc2.html" />
+<meta property="og:site_name" content="GYS’s Blog for OI/ACM" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-07-16T00:00:00+08:00" />
+<script type="application/ld+json">
+{"description":"The Race &lt;p align=&quot;right&quot;&gt;来源：POJ-2274&lt;p&gt; 题目： 给出n(n&lt;=250000)辆赛车，i赛车初始在xi(xi从小到大给出)，速度为vi，赛车在比赛时会发生超车（不会相撞）。求超车次数%1000000，并输出前10000次(不足10000次有几次输出几次)超车，格式为x y，表示x超过y，时间靠前的先输出，时间相同位置靠前的先输出，保证没有时间相同位置也相同的超车。","@type":"BlogPosting","url":"http://localhost:4000/%E8%81%AA%E8%81%AA%E7%9A%84%E7%AC%94%E8%AE%B0/2018/07/16/cc2.html","headline":"The Race","dateModified":"2018-07-16T00:00:00+08:00","datePublished":"2018-07-16T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/%E8%81%AA%E8%81%AA%E7%9A%84%E7%AC%94%E8%AE%B0/2018/07/16/cc2.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <a href="http://localhost:4000/">
+          <h1>GYS's Blog for OI/ACM</h1>
+        </a>
+        <h2>Much to do,little done.Start a battle.</h2>
+          <a href="https://zxzz106.github.io/" class="button">GYS's Website</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1 id="the-race">The Race</h1>
+<h5 id="p-alignright来源poj-2274p">&lt;p align="right"&gt;来源：POJ-2274&lt;p&gt;</h5>
+<hr />
+<h2 id="题目">题目：</h2>
+<p>给出n(n&lt;=250000)辆赛车，i赛车初始在xi(xi从小到大给出)，速度为vi，赛车在比赛时会发生超车（不会相撞）。求超车次数%1000000，并输出前10000次(不足10000次有几次输出几次)超车，格式为x y，表示x超过y，时间靠前的先输出，时间相同位置靠前的先输出，保证没有时间相同位置也相同的超车。</p>
+
+<p><strong>Input</strong></p>
+
+<p>第一行一个整数N(0 &lt; N &lt;= 250 000) ，接下来N行，每个两个整数 Xi 和Vi, (0 &lt;= Xi &lt;= 1 000 000, 0 &lt; Vi &lt; 100) X1 &lt; X2 &lt; . . . &lt; XN.</p>
+
+<p><strong>Output</strong></p>
+
+<p>输出超车发生的次数模 1 000 000。
+接下来输出前10000次超车时间的编号x和y,表示x超过y。不足10000次，输出全部。
+时间靠前的先输出，时间相同位置靠前的先输出，保证没有时间相同位置也相同的超车。</p>
+
+<p>==++<strong>Sample Input</strong>++==</p>
+
+<p>4<br />
+0 2<br />
+2 1<br />
+3 8<br />
+6 3</p>
+
+<p>==++<strong>Sample Output</strong>++==</p>
+
+<p>2 
+3 4<br />
+1 2<br />
+—</p>
+<h2 id="思路">思路：</h2>
+<ul>
+  <li>
+    <h5 id="先把发生几次超车给算出来对于每辆车如果它前面的车速度大于它那就一定会超车所以复杂度on100算出超车数量">先把发生几次超车给算出来：对于每辆车，如果它前面的车速度大于它，那就一定会超车，所以复杂度O(n*100)，算出超车数量。</h5>
+  </li>
+  <li>
+    <h4 id="那如何找出具体的超车方案呢首先我们要发现一个看似很废话的性质在超车时发生超车的两辆车一定是相邻的">那如何找出具体的超车方案呢？首先，我们要发现一个看似很废话的性质：在超车时，发生超车的两辆车一定是相邻的。</h4>
+  </li>
+  <li>
+    <h5 id="既然这样我们就对每两辆相邻且可能发生超车的车这种情况处理成一个结构体放入优先队列里用链表储存所有车之间的相对关系如果发生超车那有车之间的相对位置被改变就用链表处理">既然这样，我们就对每两辆相邻且可能发生超车的车这种情况处理成一个结构体，放入优先队列里。用链表储存所有车之间的相对关系，如果发生超车，那有车之间的相对位置被改变，就用链表处理。</h5>
+    <hr />
+    <h2 id="ac代码">AC代码：</h2>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;queue&gt;
+#define M 250005
+#define ll long long
+#define clr(a) memset(a,0,sizeof(a))
+using namespace std;
+void rd(int &amp;res) {
+	char c;
+	int flag=1;
+	res=0;
+	while(c=getchar(),c&lt;48)
+		if(c=='-')flag=-1;
+	do res=(res&lt;&lt;3)+(res&lt;&lt;1)+(c^48);
+	while(c=getchar(),c&gt;=48);
+
+	res*=flag;
+}
+void Pdfs(int n) {
+	if(n==0)return;
+	Pdfs(n/10);
+	putchar(n%10^48);
+}
+void Print(int n) {
+	if(n&lt;0) {
+		putchar('-');
+		n=-n;
+	}
+	if(n==0)putchar('0');
+	else Pdfs(n);
+}
+int x[M],v[M],l[M],r[M];
+struct node {
+	int c1,c2;
+	double ti,pla;
+	bool operator&lt;(const node &amp;_)const {
+		return ti==_.ti?pla&gt;_.pla:ti&gt;_.ti;
+	}
+};
+priority_queue&lt;node&gt;Q;
+node calc(int a,int b) {//a-&gt;b
+	int dd=x[b]-x[a],dv=v[a]-v[b];
+	double t=(double)dd/dv;
+	double p=(double)x[a]+(double)v[a]*t;
+	return (node) {
+		a,b,t,p
+	};
+}
+void add(int a,int b,int c) {
+	r[a]=b,l[b]=a;
+	r[b]=c,l[c]=b;
+}
+ll cntv[105];
+int main() {
+	int n;
+	ll ans=0;
+	while(~scanf("%d",&amp;n)) {
+		clr(cntv);
+		ans=0;
+		while(!Q.empty())Q.pop();
+		for(int i=1; i&lt;=n; i++) {
+			l[i]=i-1,r[i]=i+1;
+			rd(x[i]),rd(v[i]);
+			cntv[v[i]]++;
+			for(int j=v[i]+1; j&lt;=100; j++)ans+=cntv[j];
+		}
+		r[0]=1,l[n+1]=n;
+		ans%=1000000;
+		printf("%lld\n",ans);
+		ans=10000;
+		for(int i=1; i&lt;n; i++)
+			if(v[i]&gt;v[i+1])Q.push(calc(i,i+1));
+		while(!Q.empty()&amp;&amp;ans) {
+			node now=Q.top();
+			Q.pop();
+			if(r[now.c1]!=now.c2)continue;
+			ans--;
+			Print(now.c1);
+			printf(" ");
+			Print(now.c2);
+			printf("\n");
+			int l1=l[now.c1],r1=r[now.c2];
+			if(r1&lt;=n&amp;&amp;v[now.c1]&gt;v[r1])Q.push(calc(now.c1,r1));
+			if(l1&gt;=1&amp;&amp;v[l1]&gt;v[now.c2])Q.push(calc(l1,now.c2));
+			add(l1,now.c2,now.c1);
+			add(now.c2,now.c1,r1);
+		}
+	}
+	return 0;
+}
+</code></pre></div></div>
+
+        </section>
+
+        <aside id="sidebar">
+          
+				<h2>单调队列</h2>
+				<ul class="arc-list">
+    				
+        				<li>12/07/2018<br/><a href="/online%20contests/2018/07/12/Z17C.html">YCOI在线赛#17 (C)汽油补给</a></li>
+    				
+				</ul>
+		
+				<h2>贪心</h2>
+				<ul class="arc-list">
+    				
+        				<li>12/07/2018<br/><a href="/online%20contests/2018/07/12/Z17C.html">YCOI在线赛#17 (C)汽油补给</a></li>
+    				
+				</ul>
+		
+				<h2>逆序对</h2>
+				<ul class="arc-list">
+    				
+        				<li>13/07/2018<br/><a href="/online%20contests/2018/07/13/Z18C.html">YCOI在线赛#18 (C)The Race</a></li>
+    				
+				</ul>
+		
+				<h2>链表</h2>
+				<ul class="arc-list">
+    				
+        				<li>13/07/2018<br/><a href="/online%20contests/2018/07/13/Z18C.html">YCOI在线赛#18 (C)The Race</a></li>
+    				
+				</ul>
+		
+				<h2>想法题</h2>
+				<ul class="arc-list">
+    				
+        				<li>13/07/2018<br/><a href="/online%20contests/2018/07/13/Z18C.html">YCOI在线赛#18 (C)The Race</a></li>
+    				
+				</ul>
+		
+				<h2>线段树</h2>
+				<ul class="arc-list">
+    				
+        				<li>16/07/2018<br/><a href="/template/segment%20tree/2018/07/16/SegmentTree.html">线段树模板</a></li>
+    				
+        				<li>16/07/2018<br/><a href="/segment%20tree/2018/07/16/SegmentD.html">Kth number</a></li>
+    				
+				</ul>
+		
+				<h2>模板</h2>
+				<ul class="arc-list">
+    				
+        				<li>16/07/2018<br/><a href="/template/segment%20tree/2018/07/16/SegmentTree.html">线段树模板</a></li>
+    				
+				</ul>
+		
+        </aside>
+      </div>
+    </div>
+
+    
+  </body>
+</html>

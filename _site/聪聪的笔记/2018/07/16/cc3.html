@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=" media="screen" type="text/css">
+    <link rel="stylesheet" href="/assets/css/print.css" media="print" type="text/css">
+    <link rel="icon" href="https://avatars1.githubusercontent.com/u/21288752?s=40&amp;v=4" type="image/x-icon">
+    <style type="text/css">
+      a{text-decoration: none; padding: 10PX; color:#6633FF}
+      a:hover{ color:#6633FF;}
+      li{list-style:none}
+    </style>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>矩阵填数 | GYS’s Blog for OI/ACM</title>
+<meta name="generator" content="Jekyll v3.8.3" />
+<meta property="og:title" content="矩阵填数" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="矩阵填数 &lt;p align=&quot;right&quot;&gt;来源：hihocoder-1480&lt;p&gt;" />
+<meta property="og:description" content="矩阵填数 &lt;p align=&quot;right&quot;&gt;来源：hihocoder-1480&lt;p&gt;" />
+<link rel="canonical" href="http://localhost:4000/%E8%81%AA%E8%81%AA%E7%9A%84%E7%AC%94%E8%AE%B0/2018/07/16/cc3.html" />
+<meta property="og:url" content="http://localhost:4000/%E8%81%AA%E8%81%AA%E7%9A%84%E7%AC%94%E8%AE%B0/2018/07/16/cc3.html" />
+<meta property="og:site_name" content="GYS’s Blog for OI/ACM" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-07-16T00:00:00+08:00" />
+<script type="application/ld+json">
+{"description":"矩阵填数 &lt;p align=&quot;right&quot;&gt;来源：hihocoder-1480&lt;p&gt;","@type":"BlogPosting","url":"http://localhost:4000/%E8%81%AA%E8%81%AA%E7%9A%84%E7%AC%94%E8%AE%B0/2018/07/16/cc3.html","headline":"矩阵填数","dateModified":"2018-07-16T00:00:00+08:00","datePublished":"2018-07-16T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/%E8%81%AA%E8%81%AA%E7%9A%84%E7%AC%94%E8%AE%B0/2018/07/16/cc3.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <a href="http://localhost:4000/">
+          <h1>GYS's Blog for OI/ACM</h1>
+        </a>
+        <h2>Much to do,little done.Start a battle.</h2>
+          <a href="https://zxzz106.github.io/" class="button">GYS's Website</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1 id="矩阵填数">矩阵填数</h1>
+<h5 id="p-alignright来源hihocoder-1480p">&lt;p align="right"&gt;来源：hihocoder-1480&lt;p&gt;</h5>
+
+<hr />
+<h2 id="题目">题目：</h2>
+
+<p><strong>小Hi在玩一个游戏，他需要把1, 2, 3, … NM填入一个N行M列的矩阵中，使得矩阵每一行从左到右、每一列从上到下都是递增的。</strong></p>
+
+<h5 id="input"><code class="highlighter-rouge">$Input$</code></h5>
+<h5 id="一行包含两个整数n和m">一行包含两个整数N和M。</h5>
+<h5 id="对于60的数据-1--n--2-1--m-100000">对于60%的数据 1 &lt;= N &lt;= 2, 1 &lt;= M &lt;=100000</h5>
+<h5 id="对于20的数据-n--3-1--m--100">对于20%的数据 N = 3, 1 &lt;= M &lt;= 100</h5>
+<h5 id="对于100的数据-1--n--3-1--m--100000">对于100%的数据 1 &lt;= N &lt;= 3, 1 &lt;= M &lt;= 100000</h5>
+
+<h5 id="output"><code class="highlighter-rouge">$Output$</code></h5>
+<h5 id="输出一共有多少种不同的填法由于结果可能很大你只需输出答案模1097的余数">输出一共有多少种不同的填法。由于结果可能很大，你只需输出答案模109+7的余数。</h5>
+
+<p>==++<strong>Sample Input</strong>++==</p>
+
+<p>3 2</p>
+
+<p>++==<strong>Sample Output</strong>==++</p>
+
+<p>5</p>
+
+<hr />
+<h2 id="思路">思路：</h2>
+<blockquote>
+  <ul>
+    <li>
+      <h5 id="这道题明摆着就是有规律的只可惜太弱怎么推也推不出来而dfs的效率极低n2时只能算到m十几n3时m9就挂了">这道题明摆着就是有规律的，只可惜<del>太弱</del>，怎么推也推不出来；而dfs的效率极低，n=2时只能算到m=十几，n=3时m=9就挂了。</h5>
+    </li>
+    <li>
+      <h5 id="然而实际上这就是一道杨氏矩阵的裸题先附上杨氏矩阵的链接">然而实际上这就是一道杨氏矩阵的裸题。先附上杨氏矩阵的链接。</h5>
+      <p>转巨佬<a href="https://blog.csdn.net/acdreamers/article/details/14549077">杨氏矩阵</a></p>
+    </li>
+    <li>
+      <h5 id="所以本题的思路已经很清楚了就是用钩子公式求出一个矩阵的组成个数当然看到较大的数取模我们要尽快想到求逆元对于p1e97的各处的逆元此处有一个op的线性筛逆元">所以本题的思路已经很清楚了，就是用钩子公式求出一个矩阵的组成个数。当然，看到较大的数取模，我们要尽快想到求逆元。对于P=1e9+7的各处的逆元此处有一个O(p)的线性筛逆元：</h5>
+      <p>同转巨佬<a href="https://blog.csdn.net/qq_34564984/article/details/52292502">线性筛逆元</a></p>
+    </li>
+    <li>
+      <h5 id="接下来这题就好了">接下来这题就好了。</h5>
+      <h4 id="再附一个看不懂的钩子公式证明">再附一个<a href="https://en.wikipedia.org/wiki/Hook_length_formula">看不懂的钩子公式证明</a></h4>
+    </li>
+  </ul>
+</blockquote>
+
+<hr />
+
+<h2 id="ac代码">AC代码：</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include&lt;bits/stdc++.h&gt;
+#define ll long long
+const int P=1e9+7;
+using namespace std;
+ll fac[300005],inv[300005],n,m;
+void input(){
+	fac[0]=fac[1]=inv[1]=1;
+	for(int i=2;i&lt;=n*m;i++){
+		fac[i]=(fac[i-1]*i)%P;
+		inv[i]=(P-P/i)*inv[P%i]%P;
+	}
+}
+int main() {
+	scanf("%d%d",&amp;n,&amp;m);
+	input();
+	ll ans=fac[n*m];
+	for(int i=1;i&lt;=n;i++)
+	for(int j=1;j&lt;=m;j++){
+		ans=(ans*inv[i+j-1])%P;
+	}
+	printf("%d",ans);
+	return 0;
+}
+</code></pre></div></div>
+
+<h4 id="以为这题就这么结束了吗题是a了然而还要拓展一个叫卡特兰数的东西">以为这题就这么结束了吗？题是A了，然而还要拓展一个叫==卡特兰数==的东西。</h4>
+
+<p>疯狂转链接中：</p>
+
+<blockquote>
+  <p><a href="https://www.cnblogs.com/code-painter/p/4417354.html">卡特兰数初步学习(注意这里的证明)</a></p>
+</blockquote>
+
+<blockquote>
+  <p><a href="https://blog.csdn.net/wu_tongtong/article/details/78161211">这也是卡特兰数的初步</a></p>
+</blockquote>
+
+<blockquote>
+  <p><a href="https://www.cnblogs.com/five20/p/8530535.html">这是卡特兰数和杨氏矩阵的关联</a></p>
+
+  <p>实际上卖奶茶(只有1，2元)的实质是个进出栈问题，对于n个只有1元钱的人，2元钱的就是他们的出栈，实际上就是考虑他们的出栈顺序。</p>
+</blockquote>
+
+        </section>
+
+        <aside id="sidebar">
+          
+				<h2>单调队列</h2>
+				<ul class="arc-list">
+    				
+        				<li>12/07/2018<br/><a href="/online%20contests/2018/07/12/Z17C.html">YCOI在线赛#17 (C)汽油补给</a></li>
+    				
+				</ul>
+		
+				<h2>贪心</h2>
+				<ul class="arc-list">
+    				
+        				<li>12/07/2018<br/><a href="/online%20contests/2018/07/12/Z17C.html">YCOI在线赛#17 (C)汽油补给</a></li>
+    				
+				</ul>
+		
+				<h2>逆序对</h2>
+				<ul class="arc-list">
+    				
+        				<li>13/07/2018<br/><a href="/online%20contests/2018/07/13/Z18C.html">YCOI在线赛#18 (C)The Race</a></li>
+    				
+				</ul>
+		
+				<h2>链表</h2>
+				<ul class="arc-list">
+    				
+        				<li>13/07/2018<br/><a href="/online%20contests/2018/07/13/Z18C.html">YCOI在线赛#18 (C)The Race</a></li>
+    				
+				</ul>
+		
+				<h2>想法题</h2>
+				<ul class="arc-list">
+    				
+        				<li>13/07/2018<br/><a href="/online%20contests/2018/07/13/Z18C.html">YCOI在线赛#18 (C)The Race</a></li>
+    				
+				</ul>
+		
+				<h2>线段树</h2>
+				<ul class="arc-list">
+    				
+        				<li>16/07/2018<br/><a href="/template/segment%20tree/2018/07/16/SegmentTree.html">线段树模板</a></li>
+    				
+        				<li>16/07/2018<br/><a href="/segment%20tree/2018/07/16/SegmentD.html">Kth number</a></li>
+    				
+				</ul>
+		
+				<h2>模板</h2>
+				<ul class="arc-list">
+    				
+        				<li>16/07/2018<br/><a href="/template/segment%20tree/2018/07/16/SegmentTree.html">线段树模板</a></li>
+    				
+				</ul>
+		
+        </aside>
+      </div>
+    </div>
+
+    
+  </body>
+</html>
