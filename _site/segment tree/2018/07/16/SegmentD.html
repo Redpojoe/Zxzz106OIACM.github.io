@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=" media="screen" type="text/css">
+    <link rel="stylesheet" href="/assets/css/print.css" media="print" type="text/css">
+
+    <style type="text/css">
+      a{text-decoration: none; padding: 10PX; color:rgb(10, 54, 150)}
+      a:hover{ color:rgb(10, 54, 150);}
+      li{list-style:none}
+    </style>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Kth number | GYS’s Blog for OI/ACM</title>
+<meta name="generator" content="Jekyll v3.8.3" />
+<meta property="og:title" content="Kth number" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="线段树专题" />
+<meta property="og:description" content="线段树专题" />
+<link rel="canonical" href="http://localhost:4000/segment%20tree/2018/07/16/SegmentD.html" />
+<meta property="og:url" content="http://localhost:4000/segment%20tree/2018/07/16/SegmentD.html" />
+<meta property="og:site_name" content="GYS’s Blog for OI/ACM" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-07-16T00:00:00+08:00" />
+<script type="application/ld+json">
+{"description":"线段树专题","@type":"BlogPosting","url":"http://localhost:4000/segment%20tree/2018/07/16/SegmentD.html","headline":"Kth number","dateModified":"2018-07-16T00:00:00+08:00","datePublished":"2018-07-16T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/segment%20tree/2018/07/16/SegmentD.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <a href="http://localhost:4000/">
+          <h1>GYS's Blog for OI/ACM</h1>
+        </a>
+        <h2>Much to do,little done.Start a battle.</h2>
+          <a href="Zxzz106.github.io" class="button">GYS's Website</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1 id="线段树专题">线段树专题</h1>
+
+<h2 id="kth-number">Kth number</h2>
+
+<p><a href="https://cn.vjudge.net/problem/HDU-2665#author=634579757">题目链接</a></p>
+
+<p>询问区间内第K小的数</p>
+
+<h2 id="思路">思路</h2>
+
+<p> 网上大多数都是主席树、划分树的做法，小C讲了一种线段树的做法——把一个vector塞到节点的结构体里，再用类似于归并排序的做法将每个点的子节点合并(小C说有库函数可以直接合并有序vector)<br />
+ 如下图<br />
+<img src="https://i.loli.net/2018/07/16/5b4c77d028167.jpg" alt="Kth number" />
+ 对每次询问在vector里二分查找，找到第k小的数</p>
+
+<h2 id="代码">代码</h2>
+
+        </section>
+
+        <aside id="sidebar">
+          
+
+          
+
+          <p><a href="https://Zxzz106.github.io" target="blank">GYS's Website</a></p>
+        </aside>
+      </div>
+    </div>
+
+    
+  </body>
+</html>
