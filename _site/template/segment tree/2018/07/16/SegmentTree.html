@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/assets/css/style.css?v=" media="screen" type="text/css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print" type="text/css">
-
+    <link rel="icon" href="https://avatars1.githubusercontent.com/u/21288752?s=40&amp;v=4" type="image/x-icon">
     <style type="text/css">
       a{text-decoration: none; padding: 10PX; color:rgb(10, 54, 150)}
       a:hover{ color:rgb(10, 54, 150);}
@@ -62,103 +62,103 @@
 
 <h4 id="单点修改区间查询">单点修改，区间查询</h4>
 
-<pre><code class="language-C++">struct node {
-	int L,R,sum;
-} tree[M&lt;&lt;2];
-void up(int p) {
-	tree[p].sum=tree[p&lt;&lt;1].sum+tree[p&lt;&lt;1|1].sum;
-}
-void Build(int L,int R,int p) {
-	tree[p].L=L;
-	tree[p].R=R;
-	if(L==R) {
-		tree[p].sum=A[L];
-		return;
-	}
-	int mid=(L+R)&gt;&gt;1;
-	Build(L,mid,p&lt;&lt;1);
-	Build(mid+1,R,p&lt;&lt;1|1);
-	up(p);
-}
-void Update(int x,int d,int p) {
-	if(tree[p].L==tree[p].R) {
-		tree[p].sum+=d;
-		return;
-	}
-	int mid=(tree[p].L+tree[p].R)&gt;&gt;1;
-	if(x&lt;=mid)
-		Update(x,d,p&lt;&lt;1);
-	else
-		Update(x,d,p&lt;&lt;1|1);
-	up(p);
-}
-int Query(int L,int R,int p) {
-	if(tree[p].L==L&amp;&amp;tree[p].R==R)
-		return tree[p].sum;
-	int mid=tree[p].L+tree[p].R&gt;&gt;1;
-	if(R&lt;=mid)return Query(L,R,p&lt;&lt;1);
-	if(L&gt;mid)return Query(L,R,p&lt;&lt;1|1);
-	return Query(L,mid,p&lt;&lt;1)+Query(mid+1,R,p&lt;&lt;1|1);
-}
-</code></pre>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">node</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">L</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">sum</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">tree</span><span class="p">[</span><span class="n">M</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">];</span>
+<span class="kt">void</span> <span class="nf">up</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">sum</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">].</span><span class="n">sum</span> <span class="o">+</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">1</span><span class="p">].</span><span class="n">sum</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">Build</span><span class="p">(</span><span class="kt">int</span> <span class="n">L</span><span class="p">,</span> <span class="kt">int</span> <span class="n">R</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">L</span> <span class="o">=</span> <span class="n">L</span><span class="p">;</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">R</span> <span class="o">=</span> <span class="n">R</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">L</span> <span class="o">==</span> <span class="n">R</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">sum</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">L</span><span class="p">];</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">L</span> <span class="o">+</span> <span class="n">R</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">Build</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">Build</span><span class="p">(</span><span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">up</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">Update</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">d</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">L</span> <span class="o">==</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">R</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">sum</span> <span class="o">+=</span> <span class="n">d</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">L</span> <span class="o">+</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">R</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">mid</span><span class="p">)</span>
+        <span class="n">Update</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">else</span>
+        <span class="n">Update</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">up</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">Query</span><span class="p">(</span><span class="kt">int</span> <span class="n">L</span><span class="p">,</span> <span class="kt">int</span> <span class="n">R</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">L</span> <span class="o">==</span> <span class="n">L</span> <span class="o">&amp;&amp;</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">R</span> <span class="o">==</span> <span class="n">R</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">sum</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">L</span> <span class="o">+</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">R</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">R</span> <span class="o">&lt;=</span> <span class="n">mid</span><span class="p">)</span><span class="k">return</span> <span class="n">Query</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">L</span> <span class="o">&gt;</span> <span class="n">mid</span><span class="p">)</span><span class="k">return</span> <span class="n">Query</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">Query</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">Query</span><span class="p">(</span><span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h4 id="区间修改区间查询">区间修改，区间查询</h4>
 
-<pre><code class="language-C++">#include&lt;stdio.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;stdio.h&gt;
 #include&lt;string.h&gt;
 #define M 100005
 #define LL long long
-LL data[M],sum[M];
-struct node {
-	int L,R;
-	LL add,sum; 
-} tree[M*4];
-void Build(int L,int R,int p) {
-	tree[p].L=L,tree[p].R=R;
-	tree[p].sum=tree[p].add=0;
-	if(L==R)return;
-	int mid=(L+R)&gt;&gt;1;
-	Build(L,mid,2*p);
-	Build(mid+1,R,2*p+1);
-}
-void Up(int p) {
-	tree[p].sum=tree[2*p].sum+tree[2*p+1].sum;
-}
-void Down(int p) {
-	if(tree[p].add==0)return;
-	tree[2*p].sum+=tree[p].add*(tree[2*p].R-tree[2*p].L+1);
-	tree[2*p].add+=tree[p].add;
-	tree[2*p+1].sum+=tree[p].add*(tree[2*p+1].R-tree[2*p+1].L+1);
-	tree[2*p+1].add+=tree[p].add;
-	tree[p].add=0;
-}
-void Update(int L,int R,LL add,int p) {
-	if(tree[p].L==L&amp;&amp;tree[p].R==R) {
-		tree[p].sum+=(R-L+1)*add;
-		tree[p].add+=add;
-		return;
-	}
-	Down(p);
-	int mid=(tree[p].L+tree[p].R)&gt;&gt;1;
-	if(mid&gt;=R)Update(L,R,add,2*p);
-	else if(mid&lt;L)Update(L,R,add,2*p+1);
-	else {
-		Update(L,mid,add,2*p);
-		Update(mid+1,R,add,2*p+1);
-	}
-	Up(p);
-}
-LL Query(int L,int R,int p) {
-	if(tree[p].L==L&amp;&amp;tree[p].R==R) {
-		return tree[p].sum;
-	}
-	Down(p);
-	int mid=(tree[p].L+tree[p].R)&gt;&gt;1;
-	if(R&lt;=mid)return Query(L,R,2*p);
-	else if(L&gt;mid)return Query(L,R,2*p+1);
-	else  return Query(L,mid,2*p)+Query(mid+1,R,2*p+1);
-}
-</code></pre>
+</span><span class="n">LL</span> <span class="n">data</span><span class="p">[</span><span class="n">M</span><span class="p">],</span> <span class="n">sum</span><span class="p">[</span><span class="n">M</span><span class="p">];</span>
+<span class="k">struct</span> <span class="n">node</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">L</span><span class="p">,</span> <span class="n">R</span><span class="p">;</span>
+    <span class="n">LL</span> <span class="n">add</span><span class="p">,</span> <span class="n">sum</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">tree</span><span class="p">[</span><span class="n">M</span> <span class="o">*</span> <span class="mi">4</span><span class="p">];</span>
+<span class="kt">void</span> <span class="nf">Build</span><span class="p">(</span><span class="kt">int</span> <span class="n">L</span><span class="p">,</span> <span class="kt">int</span> <span class="n">R</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">L</span> <span class="o">=</span> <span class="n">L</span><span class="p">,</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">R</span> <span class="o">=</span> <span class="n">R</span><span class="p">;</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">sum</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">add</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">L</span> <span class="o">==</span> <span class="n">R</span><span class="p">)</span><span class="k">return</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">L</span> <span class="o">+</span> <span class="n">R</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">Build</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">p</span><span class="p">);</span>
+    <span class="n">Build</span><span class="p">(</span><span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">Up</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">sum</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p</span><span class="p">].</span><span class="n">sum</span> <span class="o">+</span> <span class="n">tree</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">].</span><span class="n">sum</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">Down</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">add</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="k">return</span><span class="p">;</span>
+    <span class="n">tree</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p</span><span class="p">].</span><span class="n">sum</span> <span class="o">+=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">add</span> <span class="o">*</span> <span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p</span><span class="p">].</span><span class="n">R</span> <span class="o">-</span> <span class="n">tree</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p</span><span class="p">].</span><span class="n">L</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">tree</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p</span><span class="p">].</span><span class="n">add</span> <span class="o">+=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">add</span><span class="p">;</span>
+    <span class="n">tree</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">].</span><span class="n">sum</span> <span class="o">+=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">add</span> <span class="o">*</span> <span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">].</span><span class="n">R</span> <span class="o">-</span> <span class="n">tree</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">].</span><span class="n">L</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">tree</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">].</span><span class="n">add</span> <span class="o">+=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">add</span><span class="p">;</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">add</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">Update</span><span class="p">(</span><span class="kt">int</span> <span class="n">L</span><span class="p">,</span> <span class="kt">int</span> <span class="n">R</span><span class="p">,</span> <span class="n">LL</span> <span class="n">add</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">L</span> <span class="o">==</span> <span class="n">L</span> <span class="o">&amp;&amp;</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">R</span> <span class="o">==</span> <span class="n">R</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">sum</span> <span class="o">+=</span> <span class="p">(</span><span class="n">R</span> <span class="o">-</span> <span class="n">L</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">add</span><span class="p">;</span>
+        <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">add</span> <span class="o">+=</span> <span class="n">add</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">Down</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">L</span> <span class="o">+</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">R</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">mid</span> <span class="o">&gt;=</span> <span class="n">R</span><span class="p">)</span><span class="n">Update</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">add</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">p</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">mid</span> <span class="o">&lt;</span> <span class="n">L</span><span class="p">)</span><span class="n">Update</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">add</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="n">Update</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">add</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">p</span><span class="p">);</span>
+        <span class="n">Update</span><span class="p">(</span><span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">add</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">Up</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">LL</span> <span class="nf">Query</span><span class="p">(</span><span class="kt">int</span> <span class="n">L</span><span class="p">,</span> <span class="kt">int</span> <span class="n">R</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">L</span> <span class="o">==</span> <span class="n">L</span> <span class="o">&amp;&amp;</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">R</span> <span class="o">==</span> <span class="n">R</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">sum</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">Down</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">L</span> <span class="o">+</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">R</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">R</span> <span class="o">&lt;=</span> <span class="n">mid</span><span class="p">)</span><span class="k">return</span> <span class="n">Query</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">p</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">L</span> <span class="o">&gt;</span> <span class="n">mid</span><span class="p">)</span><span class="k">return</span> <span class="n">Query</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">else</span>  <span class="k">return</span> <span class="n">Query</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="n">Query</span><span class="p">(</span><span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
         </section>
 
