@@ -126,51 +126,51 @@
   </ul>
 </blockquote>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include&lt;bits/stdc++.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;bits/stdc++.h&gt;
 #define ll long long
-using namespace std;
-int v[100005],p[100005],res[100005],sum,root;
-ll ans,cnt[100005];
-vector&lt;int&gt;A[100005];
-void dfs(int x) {
-	res[x]=v[x];
-	for(int i=0; i&lt;A[x].size(); i++) {
-		int y=A[x][i];
-		dfs(y);
-		res[x]+=res[y];
-		cnt[x]+=cnt[y];
-	}
-	if(x==root)return;
-	if(res[x]==2*sum)ans+=cnt[x];
-	if(res[x]==sum)ans-=cnt[x]++;
-}
-int main() {
-	int T;
-	scanf("%d",&amp;T);
-	while(T--) {
-		int n,be;
-		sum=0,ans=0;
-		scanf("%d",&amp;n);
-		for(int i=1; i&lt;=n; i++) {
-			A[i].clear();
-			cnt[i]=res[i]=0;
-		}
-		for(int i=1; i&lt;=n; i++) {
-			scanf("%d%d",&amp;v[i],&amp;p[i]);
-			A[p[i]].push_back(i);
-			sum+=v[i];
-			if(p[i]==0)root=i;
-		}
-		if(sum%3)printf("0\n");
-		else {
-			sum/=3;
-			dfs(root);
-			ans+=cnt[root]*(cnt[root]-1)/2;
-			printf("%lld\n",ans);
-		}
-	}
-	return 0;
-}
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">v</span><span class="p">[</span><span class="mi">100005</span><span class="p">],</span><span class="n">p</span><span class="p">[</span><span class="mi">100005</span><span class="p">],</span><span class="n">res</span><span class="p">[</span><span class="mi">100005</span><span class="p">],</span><span class="n">sum</span><span class="p">,</span><span class="n">root</span><span class="p">;</span>
+<span class="n">ll</span> <span class="n">ans</span><span class="p">,</span><span class="n">cnt</span><span class="p">[</span><span class="mi">100005</span><span class="p">];</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="n">A</span><span class="p">[</span><span class="mi">100005</span><span class="p">];</span>
+<span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">res</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">A</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kt">int</span> <span class="n">y</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+		<span class="n">dfs</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">res</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">+=</span><span class="n">res</span><span class="p">[</span><span class="n">y</span><span class="p">];</span>
+		<span class="n">cnt</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">+=</span><span class="n">cnt</span><span class="p">[</span><span class="n">y</span><span class="p">];</span>
+	<span class="p">}</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="n">root</span><span class="p">)</span><span class="k">return</span><span class="p">;</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="o">*</span><span class="n">sum</span><span class="p">)</span><span class="n">ans</span><span class="o">+=</span><span class="n">cnt</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">==</span><span class="n">sum</span><span class="p">)</span><span class="n">ans</span><span class="o">-=</span><span class="n">cnt</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">T</span><span class="p">;</span>
+	<span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">T</span><span class="p">);</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">T</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">be</span><span class="p">;</span>
+		<span class="n">sum</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ans</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+		<span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">clear</span><span class="p">();</span>
+			<span class="n">cnt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="o">&amp;</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+			<span class="n">A</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+			<span class="n">sum</span><span class="o">+=</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="n">root</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">sum</span><span class="o">%</span><span class="mi">3</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"0</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="k">else</span> <span class="p">{</span>
+			<span class="n">sum</span><span class="o">/=</span><span class="mi">3</span><span class="p">;</span>
+			<span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+			<span class="n">ans</span><span class="o">+=</span><span class="n">cnt</span><span class="p">[</span><span class="n">root</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">cnt</span><span class="p">[</span><span class="n">root</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+			<span class="n">printf</span><span class="p">(</span><span class="s">"%lld</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
         </section>
