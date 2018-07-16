@@ -2,122 +2,85 @@
 layout: default
 ---
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
+# Test
 
-[Link to another page](./another-page.html).
+### 线段树模板
 
-There should be whitespace between paragraphs.
-
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
-
-# Header 1
-
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
-
-## Header 2
-
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
-
-### Header 3
-
-```js
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
+```C++
+#include<stdio.h>
+#include<string.h>
+#define M 100005
+#define LL long long
+LL data[M],sum[M];
+struct node {
+	int L,R;
+	LL add,sum; 
+} tree[M*4];
+void Build(int L,int R,int p) {
+	tree[p].L=L,tree[p].R=R;
+	tree[p].sum=tree[p].add=0;
+	if(L==R)return;
+	int mid=(L+R)>>1;
+	Build(L,mid,2*p);
+	Build(mid+1,R,2*p+1);
 }
-```
-
-```ruby
-# Ruby code with syntax highlighting
-GitHubPages::Dependencies.gems.each do |gem, version|
-  s.add_dependency(gem, "= #{version}")
-end
-```
-
-#### Header 4
-
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-
-##### Header 5
-
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
-
-###### Header 6
-
-| head1        | head two          | three |
-|:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
-
-### There's a horizontal rule below this.
-
-* * *
-
-### Here is an unordered list:
-
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
-
-### And an ordered list:
-
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
-
-### And a nested list:
-
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-
-### Small image
-
-![Octocat](https://assets-cdn.github.com/images/icons/emoji/octocat.png)
-
-### Large image
-
-![Branching](https://guides.github.com/activities/hello-world/branching.png)
-
-
-### Definition lists can be used with HTML syntax.
-
-<dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
-</dl>
-
-```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
-
-```
-The final element.
+void Up(int p) {
+	tree[p].sum=tree[2*p].sum+tree[2*p+1].sum;
+}
+void Down(int p) {
+	if(tree[p].add==0)return;
+	tree[2*p].sum+=tree[p].add*(tree[2*p].R-tree[2*p].L+1);
+	tree[2*p].add+=tree[p].add;
+	tree[2*p+1].sum+=tree[p].add*(tree[2*p+1].R-tree[2*p+1].L+1);
+	tree[2*p+1].add+=tree[p].add;
+	tree[p].add=0;
+}
+void Update(int L,int R,LL add,int p) {
+	if(tree[p].L==L&&tree[p].R==R) {
+		tree[p].sum+=(R-L+1)*add;
+		tree[p].add+=add;
+		return;
+	}
+	Down(p);
+	int mid=(tree[p].L+tree[p].R)>>1;
+	if(mid>=R)Update(L,R,add,2*p);
+	else if(mid<L)Update(L,R,add,2*p+1);
+	else {
+		Update(L,mid,add,2*p);
+		Update(mid+1,R,add,2*p+1);
+	}
+	Up(p);
+}
+LL Query(int L,int R,int p) {
+	if(tree[p].L==L&&tree[p].R==R) {
+		return tree[p].sum;
+	}
+	Down(p);
+	int mid=(tree[p].L+tree[p].R)>>1;
+	if(R<=mid)return Query(L,R,2*p);
+	else if(L>mid)return Query(L,R,2*p+1);
+	else  return Query(L,mid,2*p)+Query(mid+1,R,2*p+1);
+}
+int main() {
+	int n,m,a,b,i;
+	LL c;
+	char str[10];
+	while(scanf("%d %d",&n,&m)!=EOF) {
+		Build(1,n,1);
+		sum[0]=0;
+		for( i=1; i<=n; i++) {
+			scanf("%lld",&data[i]);
+			sum[i]=sum[i-1]+data[i];
+		}
+		while(m--&&scanf("%s %d %d",str,&a,&b)) {
+			if(str[0]=='Q') {
+				printf("%lld\n",sum[b]-sum[a-1]+Query(a,b,1));
+			} else {
+				scanf("%lld",&c);
+				Update(a,b,c,1);
+			}
+		}
+	}
+	return 0;
+}
 ```
