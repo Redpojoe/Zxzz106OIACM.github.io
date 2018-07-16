@@ -1,0 +1,70 @@
+<h1 id="bone-collector-ii"><strong>Bone Collector II</strong></h1>
+<html>
+<p align="right">来源：HDU-2639</p>
+</html>
+
+<hr />
+<h2 id="题目大意">题目大意：</h2>
+
+<p>给定n个物品和一个体积为V的背包,每个物品有体积v和重量h两个属性，求用此背包能得到的第K大重量。价值相同的方案只算一次。</p>
+
+<p>Sample Input</p>
+
+<p>3&lt;/br&gt;
+5 10 2&lt;/br&gt;
+1 2 3 4 5&lt;/br&gt;
+5 4 3 2 1&lt;/br&gt;
+5 10 12&lt;/br&gt;
+1 2 3 4 5&lt;/br&gt;
+5 4 3 2 1&lt;/br&gt;
+5 10 16&lt;/br&gt;
+1 2 3 4 5&lt;/br&gt;
+5 4 3 2 1</p>
+
+<p>Sample Output</p>
+
+<p>12&lt;/br&gt;
+2&lt;/br&gt;
+0&lt;/br&gt;</p>
+
+<h2 id="思路">思路：</h2>
+<h4 id="这题不同于一般的01背包不需要考虑最大或最小值只需要把他们记录下来">这题不同于一般的01背包，不需要考虑最大或最小值，只需要把他们记录下来。</h4>
+<h4 id="因为对于每一件物品前k大的价值一定由上一件物品前k大的价值衍生而来上一层中前k大的加上当前物品的价值一定大于排在后面的加上当前价值所以可以只关心第k个k也不大只有30就只更新前k个">因为对于每一件物品，前k大的价值一定由上一件物品前k大的价值衍生而来（上一层中，前k大的加上当前物品的价值一定大于排在后面的加上当前价值），所以可以只关心第k个，k也不大，只有30，就只更新前k个。</h4>
+<h4 id="运用一种类似归并的方法先对前一层前k个价值更新选或不选当前物品衍生出2k个价值在找出这2k个中的前k个记录">运用一种类似归并的方法，先对前一层前k个价值更新，选或不选当前物品，衍生出2k个价值，在找出这2k个中的前k个记录。</h4>
+
+<p>##</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int val[105],co[105],dp[1005][35],d1[35],d2[35];
+int main() {
+	int T;
+	scanf("%d",&amp;T);
+	while(T--) {
+		memset(dp,0,sizeof(dp));
+		int n,v,k;
+		scanf("%d%d%d",&amp;n,&amp;v,&amp;k);
+		for(int i=1; i&lt;=n; i++)scanf("%d",&amp;val[i]);
+		for(int i=1; i&lt;=n; i++)scanf("%d",&amp;co[i]);
+		for(int i=1;i&lt;=n;i++){
+			for(int j=v;j&gt;=co[i];j--){
+				for(int p=1;p&lt;=k;p++){
+					d1[p]=dp[j][p];
+					d2[p]=dp[j-co[i]][p]+val[i];
+				}
+				d1[k+1]=-1,d2[k+1]=-1;//防止a已经超出k然而d1【a】的值仍大于d2【b】 
+				int a=1,b=1,c=1;
+				while((a&lt;=k||b&lt;=k)&amp;&amp;c&lt;=k){
+					if(d1[a]&gt;=d2[b])dp[j][c]=d1[a++];
+					else dp[j][c]=d2[b++];											
+					if(dp[j][c-1]!=dp[j][c])c++;
+				}
+			}
+		}
+		printf("%d\n",dp[v][k]);
+	}
+	
+	return 0;
+}
+</code></pre></div></div>
+<p><strong>AC代码</strong></p>
+

@@ -1,0 +1,78 @@
+<h1 id="dream-city"><strong>Dream City</strong></h1>
+<html>
+<p align="right">来源：ZOJ-3211</p>
+</html>
+
+<hr />
+
+<h2 id="题目大意">题目大意：</h2>
+<p>&lt;font color=brown&gt;给你n棵树，每棵树第一天有ai的果实，每天增长值bi你要在mmm天内每天砍一棵树（砍下即得到全部果实值）求mmm天内得到最大果实值。&lt;/font&gt;</p>
+
+<p>Sample Input</p>
+
+<p>2<br />
+2 1<br />
+10 10<br />
+1 1<br />
+2 2<br />
+8 10<br />
+2 3<br /></p>
+
+<p>Sample Output</p>
+
+<p>10<br />
+21<br /></p>
+
+<h2 id="思路">思路：</h2>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>这道题中，每棵树都有成长值，所以我们可以让b较小而a较大的树排在前面，先取。排序以后，从1到n每棵树i，考虑他们在第几天被砍，dp【j】=dp【j-1】+val【i】【j】。此时的dp【j-1】只包含前i-1颗树的情况。</strong></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>排序的主要目的是，确保可增长的值较小的树先被砍。如果现在不砍b较小的树，而是过一会儿再砍，那得到的结果肯定不如先砍b小的再砍大的，这肯定是亏了。</strong>
+    <h2 id="ac代码">AC代码</h2>
+    <p>```
+#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int val[255][255],dp[255];
+void check(int &amp;x,int y){
+  if(x&lt;y)x=y;
+}
+struct node{
+  int a,b;
+}A[255];
+bool cmp(node p,node q){
+  if(p.b!=q.b)return p.b&lt;q.b;
+  return p.a&gt;p.b;
+}
+int main() {
+  int T;
+  scanf(“%d”,&amp;T);
+  while(T–) {
+      memset(dp,0,sizeof(dp));
+      int n,m;
+      scanf(“%d%d”,&amp;n,&amp;m);
+      for(int i=1; i&lt;=n; i++)scanf(“%d”,&amp;A[i].a);
+      for(int i=1; i&lt;=n; i++)scanf(“%d”,&amp;A[i].b);
+      sort(A+1,A+n+1,cmp);
+      for(int i=1;i&lt;=n;i++)val[i][1]=A[i].a;
+      for(int i=1; i&lt;=n; i++)
+          for(int j=2; j&lt;=m; j++)
+              val[i][j]=val[i][j-1]+A[i].b;
+      /<em>for(int i=1;i&lt;=n;i++){
+          for(int j=1;j&lt;=m;j++)printf(“%d “,val[i][j]);
+          printf(“\n”);
+      }</em>/
+      int ans=0;
+      for(int i=1;i&lt;=n;i++){
+          for(int j=m;j&gt;=1;j–){
+              check(dp[j],dp[j-1]+val[i][j]);
+              check(ans,dp[j]);
+          }
+      }
+      printf(“%d\n”,ans);
+  }
+  return 0;
+}</p>
+  </li>
+</ul>
+
+<p>```</p>
