@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=" media="screen" type="text/css">
+    <link rel="stylesheet" href="/assets/css/print.css" media="print" type="text/css">
+
+    <style type="text/css">
+      a{text-decoration: none; padding: 10PX; color:rgb(10, 54, 150)}
+      a:hover{ color:rgb(10, 54, 150);}
+      li{list-style:none}
+    </style>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>线段树模板 | GYS’s Blog for OI/ACM</title>
+<meta name="generator" content="Jekyll v3.8.3" />
+<meta property="og:title" content="线段树模板" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="线段树模板" />
+<meta property="og:description" content="线段树模板" />
+<link rel="canonical" href="http://localhost:4000/template/segment%20tree/2018/07/12/SegmentTree.html" />
+<meta property="og:url" content="http://localhost:4000/template/segment%20tree/2018/07/12/SegmentTree.html" />
+<meta property="og:site_name" content="GYS’s Blog for OI/ACM" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-07-12T00:00:00+08:00" />
+<script type="application/ld+json">
+{"description":"线段树模板","@type":"BlogPosting","url":"http://localhost:4000/template/segment%20tree/2018/07/12/SegmentTree.html","headline":"线段树模板","dateModified":"2018-07-12T00:00:00+08:00","datePublished":"2018-07-12T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/template/segment%20tree/2018/07/12/SegmentTree.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <a href="http://localhost:4000/">
+          <h1>GYS's Blog for OI/ACM</h1>
+        </a>
+        <h2>Much to do,little done.Start a battle.</h2>
+        
+        
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1 id="线段树模板">线段树模板</h1>
+
+<h2 id="概况">概况</h2>
+
+<p> 线段树是一种很强大的数据结构，支持O(nlogn)地区间修改、查询极值、查询区间和，但常数比树状数组等同样是区间上的数据结构大。<br />
+ 一般来讲，处理区间问题考虑的数据结构顺序应为：<br />
+  前缀和-&gt;差分-&gt;树状数组-&gt;线段树-&gt;分块</p>
+
+<h2 id="代码">代码</h2>
+
+<p>为适应不同题目需求，有不同的线段树打法 <del>其实就是改改结构体和Up</del></p>
+
+<h4 id="单点修改区间查询">单点修改，区间查询</h4>
+
+<pre><code class="language-C++">struct node {
+	int L,R,sum;
+} tree[M&lt;&lt;2];
+void up(int p) {
+	tree[p].sum=tree[p&lt;&lt;1].sum+tree[p&lt;&lt;1|1].sum;
+}
+void Build(int L,int R,int p) {
+	tree[p].L=L;
+	tree[p].R=R;
+	if(L==R) {
+		tree[p].sum=A[L];
+		return;
+	}
+	int mid=(L+R)&gt;&gt;1;
+	Build(L,mid,p&lt;&lt;1);
+	Build(mid+1,R,p&lt;&lt;1|1);
+	up(p);
+}
+void Update(int x,int d,int p) {
+	if(tree[p].L==tree[p].R) {
+		tree[p].sum+=d;
+		return;
+	}
+	int mid=(tree[p].L+tree[p].R)&gt;&gt;1;
+	if(x&lt;=mid)
+		Update(x,d,p&lt;&lt;1);
+	else
+		Update(x,d,p&lt;&lt;1|1);
+	up(p);
+}
+int Query(int L,int R,int p) {
+	if(tree[p].L==L&amp;&amp;tree[p].R==R)
+		return tree[p].sum;
+	int mid=tree[p].L+tree[p].R&gt;&gt;1;
+	if(R&lt;=mid)return Query(L,R,p&lt;&lt;1);
+	if(L&gt;mid)return Query(L,R,p&lt;&lt;1|1);
+	return Query(L,mid,p&lt;&lt;1)+Query(mid+1,R,p&lt;&lt;1|1);
+}
+</code></pre>
+
+<h4 id="区间修改区间查询">区间修改，区间查询</h4>
+
+<pre><code class="language-C++">#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+#define M 100005
+#define LL long long
+LL data[M],sum[M];
+struct node {
+	int L,R;
+	LL add,sum; 
+} tree[M*4];
+void Build(int L,int R,int p) {
+	tree[p].L=L,tree[p].R=R;
+	tree[p].sum=tree[p].add=0;
+	if(L==R)return;
+	int mid=(L+R)&gt;&gt;1;
+	Build(L,mid,2*p);
+	Build(mid+1,R,2*p+1);
+}
+void Up(int p) {
+	tree[p].sum=tree[2*p].sum+tree[2*p+1].sum;
+}
+void Down(int p) {
+	if(tree[p].add==0)return;
+	tree[2*p].sum+=tree[p].add*(tree[2*p].R-tree[2*p].L+1);
+	tree[2*p].add+=tree[p].add;
+	tree[2*p+1].sum+=tree[p].add*(tree[2*p+1].R-tree[2*p+1].L+1);
+	tree[2*p+1].add+=tree[p].add;
+	tree[p].add=0;
+}
+void Update(int L,int R,LL add,int p) {
+	if(tree[p].L==L&amp;&amp;tree[p].R==R) {
+		tree[p].sum+=(R-L+1)*add;
+		tree[p].add+=add;
+		return;
+	}
+	Down(p);
+	int mid=(tree[p].L+tree[p].R)&gt;&gt;1;
+	if(mid&gt;=R)Update(L,R,add,2*p);
+	else if(mid&lt;L)Update(L,R,add,2*p+1);
+	else {
+		Update(L,mid,add,2*p);
+		Update(mid+1,R,add,2*p+1);
+	}
+	Up(p);
+}
+LL Query(int L,int R,int p) {
+	if(tree[p].L==L&amp;&amp;tree[p].R==R) {
+		return tree[p].sum;
+	}
+	Down(p);
+	int mid=(tree[p].L+tree[p].R)&gt;&gt;1;
+	if(R&lt;=mid)return Query(L,R,2*p);
+	else if(L&gt;mid)return Query(L,R,2*p+1);
+	else  return Query(L,mid,2*p)+Query(mid+1,R,2*p+1);
+}
+</code></pre>
+
+        </section>
+
+        <aside id="sidebar">
+          
+
+          
+
+          <p><a href="https://Zxzz106.github.io" target="blank">GYS's Website</a></p>
+        </aside>
+      </div>
+    </div>
+
+    
+  </body>
+</html>

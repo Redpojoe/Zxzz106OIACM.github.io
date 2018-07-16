@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="/assets/css/style.css?v=" media="screen" type="text/css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print" type="text/css">
 
+    <style type="text/css">
+      a{text-decoration: none; padding: 10PX; color:rgb(10, 54, 150)}
+      a:hover{ color:rgb(10, 54, 150);}
+      li{list-style:none}
+    </style>
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -46,11 +51,15 @@
         <section id="main-content">
           <h1 id="ycoi2018在线赛18">YCOI2018在线赛#18</h1>
 
-<h2 id="c">C</h2>
+<h2 id="the-race">The Race</h2>
+
+<p><a href="http://poj.org/problem?id=2274">题目链接</a></p>
 
 <h3 id="思路">思路</h3>
 
-<p>题目要求得超车次数，即是求对于每一个点A，存在点B使得A.x<B.x且A.v>B.v</B.x且A.v></p>
+<p> 题目要求得超车次数，即是求对于每一个点A，存在点B使得A.x<B.x且A.v>B.v。用逆序对算法即可解决  
+&emsp;[重点]考虑到超车在相邻的两辆车之间，那么只要维护一个优先队列，取出前10000个即可
+&emsp;总的复杂度 O(nlogn)</B.x且A.v></p>
 
         </section>
 
