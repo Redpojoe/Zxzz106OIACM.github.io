@@ -88,9 +88,7 @@
 <p>附上wr的代码
 代码风格不错</p>
 
-<pre><code class="language-C++">#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
-#include&lt;algorithm&gt;
+<pre><code class="language-C++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
 int n,m,r,c,ans=1e9;
 int choose[16];
@@ -117,13 +115,13 @@ void DP() {
     for(int i=c; i&lt;=m; i++)
         ans=min(ans,dp[c][i]);
 }
-void dfs(int col,int selected) {
-    if(col&gt;r) {
+void dfs(int now,int pre) {
+    if(now&gt;r) {
         DP();
         return;
     }
-    for(int i=selected+1; n-i&gt;=r-k; i++) {
-        choose[col]=i;
+    for(int i=pre+1; n-i&gt;=r-k; i++) {
+        choose[now]=i;
         dfs(k+1,i);
     }
 }
