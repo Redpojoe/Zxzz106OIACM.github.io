@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="/assets/css/style.css?v=" media="screen" type="text/css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print" type="text/css">
     <link rel="icon" href="https://avatars1.githubusercontent.com/u/21288752?s=40&amp;v=4" type="image/x-icon">
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
     <style type="text/css">
       a{text-decoration: none; padding: 10PX; color:#6633FF}
       a:hover{ color:#6633FF;}
@@ -54,12 +57,13 @@
 <hr />
 
 <h2 id="题目大意">题目大意：</h2>
-<h5 id="有k个正数求有多少种方案满足">有<code class="highlighter-rouge">$K$</code>个正数，求有多少种方案满足：</h5>
-<pre><code class="language-math"> SUM(A_1,A_2,A_3,\cdots,A_K)=N
- 
- LCM(A_1,A_2,A_3,\cdots,A_K)=M
-</code></pre>
-<p>数据范围： <code class="highlighter-rouge">$1 \le K \le 10^2, 1\le N,M \le 10^3$</code></p>
+<h5 id="有k个正数求有多少种方案满足">有<script type="math/tex">K</script>个正数，求有多少种方案满足：</h5>
+
+<script type="math/tex; mode=display">SUM(A_1,A_2,A_3,\cdots,A_K)=N</script>
+
+<script type="math/tex; mode=display">LCM(A_1,A_2,A_3,\cdots,A_K)=M</script>
+
+<p>数据范围： <script type="math/tex">1 \le K \le 10^2, 1\le N,M \le 10^3</script></p>
 
 <hr />
 
@@ -88,9 +92,12 @@
   </li>
   <li>
     <h5 id="序列中的lcm问题如果数据范围不是太大的话就先把lcm预处理出来而">序列中的<code class="highlighter-rouge">$lcm$</code>问题，如果数据范围不是太大的话，就先把lcm预处理出来。而</h5>
-    <pre><code class="language-math">lcm(i,j) = i*j/gcd(i,j)
-</code></pre>
   </li>
+</ul>
+
+<script type="math/tex; mode=display">lcm(i,j) = \frac{i\times j}{gcd(i,j)}</script>
+
+<ul>
   <li>
     <h5 id="并且gcdij的时间复杂度为lognn为minij所以本题中我们可以预处理出任意两数的lcm">并且gcd(i,j)的时间复杂度为(logn)(n为min(i,j)),所以本题中我们可以预处理出任意两数的lcm。</h5>
   </li>
