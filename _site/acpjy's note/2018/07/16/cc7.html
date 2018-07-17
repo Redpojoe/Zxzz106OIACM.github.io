@@ -34,19 +34,19 @@
     <![endif]-->
 
 <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>YCOI在线赛#17 (C)汽油补给 | GYS’s Blog for OI/ACM</title>
+<title>Course Selection System | GYS’s Blog for OI/ACM</title>
 <meta name="generator" content="Jekyll v3.8.3" />
-<meta property="og:title" content="YCOI在线赛#17 (C)汽油补给" />
+<meta property="og:title" content="Course Selection System" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="YCOI2018在线赛#17" />
-<meta property="og:description" content="YCOI2018在线赛#17" />
-<link rel="canonical" href="http://localhost:4000/online%20contests/2018/07/12/Z17C.html" />
-<meta property="og:url" content="http://localhost:4000/online%20contests/2018/07/12/Z17C.html" />
+<meta name="description" content="Course Selection System &lt;p align=&quot;right&quot;&gt;来源：ZOJ-3956&lt;/p&gt;" />
+<meta property="og:description" content="Course Selection System &lt;p align=&quot;right&quot;&gt;来源：ZOJ-3956&lt;/p&gt;" />
+<link rel="canonical" href="http://localhost:4000/acpjy's%20note/2018/07/16/cc7.html" />
+<meta property="og:url" content="http://localhost:4000/acpjy's%20note/2018/07/16/cc7.html" />
 <meta property="og:site_name" content="GYS’s Blog for OI/ACM" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2018-07-12T00:00:00+08:00" />
+<meta property="article:published_time" content="2018-07-16T00:00:00+08:00" />
 <script type="application/ld+json">
-{"description":"YCOI2018在线赛#17","@type":"BlogPosting","url":"http://localhost:4000/online%20contests/2018/07/12/Z17C.html","headline":"YCOI在线赛#17 (C)汽油补给","dateModified":"2018-07-12T00:00:00+08:00","datePublished":"2018-07-12T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/online%20contests/2018/07/12/Z17C.html"},"@context":"http://schema.org"}</script>
+{"description":"Course Selection System &lt;p align=&quot;right&quot;&gt;来源：ZOJ-3956&lt;/p&gt;","@type":"BlogPosting","url":"http://localhost:4000/acpjy's%20note/2018/07/16/cc7.html","headline":"Course Selection System","dateModified":"2018-07-16T00:00:00+08:00","datePublished":"2018-07-16T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/acpjy's%20note/2018/07/16/cc7.html"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -65,47 +65,79 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h1 id="ycoi2018在线赛17">YCOI2018在线赛#17</h1>
+          <h1 id="course-selection-system">Course Selection System</h1>
+<h4 id="p-alignright来源zoj-3956p">&lt;p align="right"&gt;来源：ZOJ-3956&lt;/p&gt;</h4>
 
-<h2 id="汽油补给">汽油补给</h2>
+<hr />
+<h2 id="题目大意">题目大意：</h2>
+<h5 id="给定n门课每门课有两个属性h_i和c_i">给定<code class="highlighter-rouge">$n$</code>门课，每门课有两个属性<code class="highlighter-rouge">$H_i$</code>和<code class="highlighter-rouge">$C_i$</code>。</h5>
+<h5 id="如果选出某些课程x_1x_2cdotsx_m舒适值为">如果选出某些课程<code class="highlighter-rouge">$x_1,x_2,\cdots,x_m$</code>，舒适值为：</h5>
+<pre><code class="language-math"> (\sum_{i=1}^mH_{x_i})^2-(\sum_{i=1}^mH_{x_i})*(\sum_{i=1}^mC_{x_i})-(\sum_{i=1}^mC_{x_i})^2
+</code></pre>
+<h5 id="设计一个选课方案使得舒适值最大">设计一个选课方案，使得舒适值最大。</h5>
 
-<p><a href="https://www.51nod.com/onlineJudge/questionCode.html#!problemId=1288">题目链接</a></p>
+<hr />
 
-<h3 id="思路">思路</h3>
+<p>++<strong>==Sample Input==</strong>++</p>
 
-<p>回撤贪心思想，借助单调队列（递减）。对于一个已到达的点，先将油箱填满（压入到队尾），不断使用已买到的油中最便宜的（弹出队头），用能够买到的更便宜的油替代掉队尾的节点。
-想得到决策用贪心以后就比较容易了。</p>
+<p>2<br />
+3<br />
+10 1<br />
+5 1<br />
+2 10<br />
+2<br />
+1 10<br />
+2 10</p>
 
-<h3 id="代码">代码</h3>
+<p>++<strong>==Sample Output==</strong>++</p>
 
-<pre><code class="language-C++">for (int i = 1; i &lt;= n; i++) {
-    scanf("%d%d", &amp;a, &amp;b);
-    if (a &gt; T) {
-        printf("-1\n");
-        return 0;
-    }
-    while (L &lt;= R &amp;&amp; Q[R].p &gt; b) {
-        v -= Q[R].v;
-        R--;
-    }
-    Q[++R] = (node) {T - v, b};
-    v = T;
-    v -= a;
-    while (a &gt; 0) {
-        if (Q[L].v &gt;= a) {
-            ans += a * (ll)Q[L].p;
-            Q[L].v -= a;
-            a = 0;
-        }
-        else {
-            ans += Q[L].v * (ll)Q[L].p;
-            a -= Q[L].v;
-            L++;
-        }
-    }
-}
+<p>191<br />
+0</p>
+
+<hr />
+
+<h2 id="思路">思路：</h2>
+<h5 id="刚开始看那个西格玛公式有点懵它是指对于选择的课程各课程的h总和为shc总和为ch则总舒适值t">刚开始看，那个西格玛公式有点懵。它是指对于选择的课程，各课程的h总和为sh，c总和为ch，则总舒适值T：</h5>
+
+<pre><code class="language-math">T = sh^2-sh*sc-sc^2;
 </code></pre>
 
+<h5 id="好知道了公式什么意思我们再来深究这个公式">好，知道了公式什么意思，我们再来深究这个公式：</h5>
+
+<pre><code class="language-math">sh^2-sh*sc=sh(sh-sc);
+</code></pre>
+<h5 id="sc不变时当shsc时sh越大舒适值越大当shsc时舒适值t0不需要选明显ans这就可以想到用hc其中的一个作为dp的阶段就可以求出最大的舒适值了那用哪个呢显而易见使用较小的c于是算出所有课程的c值总和开始dp求出各个sc时最大的sh进而找到最舒适的课程">sc不变时，当sh&gt;sc时，sh越大，舒适值越大；当sh&lt;sc时，舒适值T&lt;0，不需要选，明显&lt;ans。这就可以想到，用h、c其中的一个作为dp的阶段，就可以求出最大的舒适值了。那用哪个呢？显而易见，使用较小的c。于是算出所有课程的c值总和，开始dp，求出各个sc时最大的sh，进而找到最舒适的课程。</h5>
+
+<h2 id="ac代码">AC代码：</h2>
+
+<pre><code class="language-C++">#include&lt;bits/stdc++.h&gt;
+#define ll long long
+using namespace std;
+int h[505],c[505];
+ll dp[50005];
+void check(ll &amp;x,ll y){
+	if(x&lt;y)x=y;
+}
+int main() {
+	int T;
+	scanf("%d",&amp;T);
+	while(T--) {
+		int n,sum=0;
+		scanf("%d",&amp;n);
+		for(int i=1; i&lt;=n; i++)
+			scanf("%d%d",&amp;h[i],&amp;c[i]),sum+=c[i];
+		ll ans=0;
+		for(int i=1; i&lt;=n; i++) 
+			for(int j=sum; j&gt;=c[i]; j--){
+				check(dp[j],dp[j-c[i]]+h[i]);
+				check(ans,dp[j]*dp[j]-dp[j]*j-j*j);
+			}
+		printf("%lld\n",ans);
+		for(int i=0;i&lt;=sum;i++)dp[i]=0;
+	}
+	return 0;
+}
+</code></pre>
 
           <script>
             var idcomments_acct = '4e68ed3635838eee1563143fe75435eb';

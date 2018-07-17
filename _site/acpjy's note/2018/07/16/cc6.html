@@ -34,19 +34,19 @@
     <![endif]-->
 
 <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>YCOI在线赛#17 (C)汽油补给 | GYS’s Blog for OI/ACM</title>
+<title>Bone Collector II | GYS’s Blog for OI/ACM</title>
 <meta name="generator" content="Jekyll v3.8.3" />
-<meta property="og:title" content="YCOI在线赛#17 (C)汽油补给" />
+<meta property="og:title" content="Bone Collector II" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="YCOI2018在线赛#17" />
-<meta property="og:description" content="YCOI2018在线赛#17" />
-<link rel="canonical" href="http://localhost:4000/online%20contests/2018/07/12/Z17C.html" />
-<meta property="og:url" content="http://localhost:4000/online%20contests/2018/07/12/Z17C.html" />
+<meta name="description" content="Bone Collector II 来源：HDU-2639" />
+<meta property="og:description" content="Bone Collector II 来源：HDU-2639" />
+<link rel="canonical" href="http://localhost:4000/acpjy's%20note/2018/07/16/cc6.html" />
+<meta property="og:url" content="http://localhost:4000/acpjy's%20note/2018/07/16/cc6.html" />
 <meta property="og:site_name" content="GYS’s Blog for OI/ACM" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2018-07-12T00:00:00+08:00" />
+<meta property="article:published_time" content="2018-07-16T00:00:00+08:00" />
 <script type="application/ld+json">
-{"description":"YCOI2018在线赛#17","@type":"BlogPosting","url":"http://localhost:4000/online%20contests/2018/07/12/Z17C.html","headline":"YCOI在线赛#17 (C)汽油补给","dateModified":"2018-07-12T00:00:00+08:00","datePublished":"2018-07-12T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/online%20contests/2018/07/12/Z17C.html"},"@context":"http://schema.org"}</script>
+{"description":"Bone Collector II 来源：HDU-2639","@type":"BlogPosting","url":"http://localhost:4000/acpjy's%20note/2018/07/16/cc6.html","headline":"Bone Collector II","dateModified":"2018-07-16T00:00:00+08:00","datePublished":"2018-07-16T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/acpjy's%20note/2018/07/16/cc6.html"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -65,46 +65,76 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h1 id="ycoi2018在线赛17">YCOI2018在线赛#17</h1>
+          <h1 id="bone-collector-ii"><strong>Bone Collector II</strong></h1>
+<html>
+<p align="right">来源：HDU-2639</p>
+</html>
 
-<h2 id="汽油补给">汽油补给</h2>
+<hr />
+<h2 id="题目大意">题目大意：</h2>
 
-<p><a href="https://www.51nod.com/onlineJudge/questionCode.html#!problemId=1288">题目链接</a></p>
+<p>给定n个物品和一个体积为V的背包,每个物品有体积v和重量h两个属性，求用此背包能得到的第K大重量。价值相同的方案只算一次。</p>
 
-<h3 id="思路">思路</h3>
+<p>Sample Input</p>
 
-<p>回撤贪心思想，借助单调队列（递减）。对于一个已到达的点，先将油箱填满（压入到队尾），不断使用已买到的油中最便宜的（弹出队头），用能够买到的更便宜的油替代掉队尾的节点。
-想得到决策用贪心以后就比较容易了。</p>
+<p>3&lt;/br&gt;
+5 10 2&lt;/br&gt;
+1 2 3 4 5&lt;/br&gt;
+5 4 3 2 1&lt;/br&gt;
+5 10 12&lt;/br&gt;
+1 2 3 4 5&lt;/br&gt;
+5 4 3 2 1&lt;/br&gt;
+5 10 16&lt;/br&gt;
+1 2 3 4 5&lt;/br&gt;
+5 4 3 2 1</p>
 
-<h3 id="代码">代码</h3>
+<p>Sample Output</p>
 
-<pre><code class="language-C++">for (int i = 1; i &lt;= n; i++) {
-    scanf("%d%d", &amp;a, &amp;b);
-    if (a &gt; T) {
-        printf("-1\n");
-        return 0;
-    }
-    while (L &lt;= R &amp;&amp; Q[R].p &gt; b) {
-        v -= Q[R].v;
-        R--;
-    }
-    Q[++R] = (node) {T - v, b};
-    v = T;
-    v -= a;
-    while (a &gt; 0) {
-        if (Q[L].v &gt;= a) {
-            ans += a * (ll)Q[L].p;
-            Q[L].v -= a;
-            a = 0;
-        }
-        else {
-            ans += Q[L].v * (ll)Q[L].p;
-            a -= Q[L].v;
-            L++;
-        }
-    }
+<p>12&lt;/br&gt;
+2&lt;/br&gt;
+0&lt;/br&gt;</p>
+
+<h2 id="思路">思路：</h2>
+<h4 id="这题不同于一般的01背包不需要考虑最大或最小值只需要把他们记录下来">这题不同于一般的01背包，不需要考虑最大或最小值，只需要把他们记录下来。</h4>
+<h4 id="因为对于每一件物品前k大的价值一定由上一件物品前k大的价值衍生而来上一层中前k大的加上当前物品的价值一定大于排在后面的加上当前价值所以可以只关心第k个k也不大只有30就只更新前k个">因为对于每一件物品，前k大的价值一定由上一件物品前k大的价值衍生而来（上一层中，前k大的加上当前物品的价值一定大于排在后面的加上当前价值），所以可以只关心第k个，k也不大，只有30，就只更新前k个。</h4>
+<h4 id="运用一种类似归并的方法先对前一层前k个价值更新选或不选当前物品衍生出2k个价值在找出这2k个中的前k个记录">运用一种类似归并的方法，先对前一层前k个价值更新，选或不选当前物品，衍生出2k个价值，在找出这2k个中的前k个记录。</h4>
+
+<p>##</p>
+
+<pre><code class="language-C++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int val[105],co[105],dp[1005][35],d1[35],d2[35];
+int main() {
+	int T;
+	scanf("%d",&amp;T);
+	while(T--) {
+		memset(dp,0,sizeof(dp));
+		int n,v,k;
+		scanf("%d%d%d",&amp;n,&amp;v,&amp;k);
+		for(int i=1; i&lt;=n; i++)scanf("%d",&amp;val[i]);
+		for(int i=1; i&lt;=n; i++)scanf("%d",&amp;co[i]);
+		for(int i=1;i&lt;=n;i++){
+			for(int j=v;j&gt;=co[i];j--){
+				for(int p=1;p&lt;=k;p++){
+					d1[p]=dp[j][p];
+					d2[p]=dp[j-co[i]][p]+val[i];
+				}
+				d1[k+1]=-1,d2[k+1]=-1;//防止a已经超出k然而d1【a】的值仍大于d2【b】 
+				int a=1,b=1,c=1;
+				while((a&lt;=k||b&lt;=k)&amp;&amp;c&lt;=k){
+					if(d1[a]&gt;=d2[b])dp[j][c]=d1[a++];
+					else dp[j][c]=d2[b++];											
+					if(dp[j][c-1]!=dp[j][c])c++;
+				}
+			}
+		}
+		printf("%d\n",dp[v][k]);
+	}
+	
+	return 0;
 }
 </code></pre>
+<p><strong>AC代码</strong></p>
 
 
           <script>

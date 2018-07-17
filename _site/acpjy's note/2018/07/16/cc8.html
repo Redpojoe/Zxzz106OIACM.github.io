@@ -34,19 +34,19 @@
     <![endif]-->
 
 <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>矩阵填数 | GYS’s Blog for OI/ACM</title>
+<title>Doing Homework | GYS’s Blog for OI/ACM</title>
 <meta name="generator" content="Jekyll v3.8.3" />
-<meta property="og:title" content="矩阵填数" />
+<meta property="og:title" content="Doing Homework" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="矩阵填数 来源：hihocoder-1480" />
-<meta property="og:description" content="矩阵填数 来源：hihocoder-1480" />
-<link rel="canonical" href="http://localhost:4000/acpjy's%20note/2018/07/16/cc3.html" />
-<meta property="og:url" content="http://localhost:4000/acpjy's%20note/2018/07/16/cc3.html" />
+<meta name="description" content="Doing Homework 来源：HDU_1074" />
+<meta property="og:description" content="Doing Homework 来源：HDU_1074" />
+<link rel="canonical" href="http://localhost:4000/acpjy's%20note/2018/07/16/cc8.html" />
+<meta property="og:url" content="http://localhost:4000/acpjy's%20note/2018/07/16/cc8.html" />
 <meta property="og:site_name" content="GYS’s Blog for OI/ACM" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2018-07-16T00:00:00+08:00" />
 <script type="application/ld+json">
-{"description":"矩阵填数 来源：hihocoder-1480","@type":"BlogPosting","url":"http://localhost:4000/acpjy's%20note/2018/07/16/cc3.html","headline":"矩阵填数","dateModified":"2018-07-16T00:00:00+08:00","datePublished":"2018-07-16T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/acpjy's%20note/2018/07/16/cc3.html"},"@context":"http://schema.org"}</script>
+{"description":"Doing Homework 来源：HDU_1074","@type":"BlogPosting","url":"http://localhost:4000/acpjy's%20note/2018/07/16/cc8.html","headline":"Doing Homework","dateModified":"2018-07-16T00:00:00+08:00","datePublished":"2018-07-16T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/acpjy's%20note/2018/07/16/cc8.html"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -65,99 +65,156 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h1 id="矩阵填数">矩阵填数</h1>
-<h5 id="来源hihocoder-1480">来源：hihocoder-1480</h5>
-
-<hr />
-<h2 id="题目">题目：</h2>
-
-<p><strong>小Hi在玩一个游戏，他需要把1, 2, 3, … NM填入一个N行M列的矩阵中，使得矩阵每一行从左到右、每一列从上到下都是递增的。</strong></p>
-
-<h5 id="input"><code class="highlighter-rouge">$Input$</code></h5>
-<h5 id="一行包含两个整数n和m">一行包含两个整数N和M。</h5>
-<h5 id="对于60的数据-1--n--2-1--m-100000">对于60%的数据 1 &lt;= N &lt;= 2, 1 &lt;= M &lt;=100000</h5>
-<h5 id="对于20的数据-n--3-1--m--100">对于20%的数据 N = 3, 1 &lt;= M &lt;= 100</h5>
-<h5 id="对于100的数据-1--n--3-1--m--100000">对于100%的数据 1 &lt;= N &lt;= 3, 1 &lt;= M &lt;= 100000</h5>
-
-<h5 id="output"><code class="highlighter-rouge">$Output$</code></h5>
-<h5 id="输出一共有多少种不同的填法由于结果可能很大你只需输出答案模1097的余数">输出一共有多少种不同的填法。由于结果可能很大，你只需输出答案模109+7的余数。</h5>
-
-<p>==++<strong>Sample Input</strong>++==</p>
-
-<p>3 2</p>
-
-<p>++==<strong>Sample Output</strong>==++</p>
-
-<p>5</p>
-
-<hr />
-<h2 id="思路">思路：</h2>
-<blockquote>
-  <ul>
-    <li>
-      <h5 id="这道题明摆着就是有规律的只可惜太弱怎么推也推不出来而dfs的效率极低n2时只能算到m十几n3时m9就挂了">这道题明摆着就是有规律的，只可惜<del>太弱</del>，怎么推也推不出来；而dfs的效率极低，n=2时只能算到m=十几，n=3时m=9就挂了。</h5>
-    </li>
-    <li>
-      <h5 id="然而实际上这就是一道杨氏矩阵的裸题先附上杨氏矩阵的链接">然而实际上这就是一道杨氏矩阵的裸题。先附上杨氏矩阵的链接。</h5>
-      <p>转巨佬<a href="https://blog.csdn.net/acdreamers/article/details/14549077">杨氏矩阵</a></p>
-    </li>
-    <li>
-      <h5 id="所以本题的思路已经很清楚了就是用钩子公式求出一个矩阵的组成个数当然看到较大的数取模我们要尽快想到求逆元对于p1e97的各处的逆元此处有一个op的线性筛逆元">所以本题的思路已经很清楚了，就是用钩子公式求出一个矩阵的组成个数。当然，看到较大的数取模，我们要尽快想到求逆元。对于P=1e9+7的各处的逆元此处有一个O(p)的线性筛逆元：</h5>
-      <p>同转巨佬<a href="https://blog.csdn.net/qq_34564984/article/details/52292502">线性筛逆元</a></p>
-    </li>
-    <li>
-      <h5 id="接下来这题就好了">接下来这题就好了。</h5>
-      <h4 id="再附一个看不懂的钩子公式证明">再附一个<a href="https://en.wikipedia.org/wiki/Hook_length_formula">看不懂的钩子公式证明</a></h4>
-    </li>
-  </ul>
-</blockquote>
+          <h1 id="doing-homework"><strong>Doing Homework</strong></h1>
+<html>
+<p align="right"> 来源：HDU_1074 </p>
+</html>
 
 <hr />
 
-<h2 id="ac代码">AC代码：</h2>
+<h2 id="题目大意"><strong>题目大意</strong>：</h2>
+<p>&lt;font color=brown&gt;有n个任务，每个任务有一个截止时间，超过截止时间一天，要扣一个分。
+求如何安排任务，使得扣的分数最少。&lt;/font&gt;</p>
+
+<p>Sample Input</p>
+
+<p>2&lt;/br&gt;
+3&lt;/br&gt;
+Computer 3 3&lt;/br&gt;
+English 20 1&lt;/br&gt;
+Math 3 2&lt;/br&gt;
+3&lt;/br&gt;
+Computer 3 3&lt;/br&gt;
+English 6 3&lt;/br&gt;
+Math 6 3</p>
+
+<p>Sample Output</p>
+
+<p>2&lt;/br&gt;
+Computer&lt;/br&gt;
+Math&lt;/br&gt;
+English&lt;/br&gt;
+3&lt;/br&gt;
+Computer&lt;/br&gt;
+English&lt;/br&gt;
+Math&lt;/br&gt;</p>
+
+<h2 id="思路"><strong>思路：</strong></h2>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />本来用的是状压+dp，大部分数据也能过，杭电OJ上也AC。然而对拍出来有错（几乎所有状压dp的代码都是错的，并且错处几乎一样）。这里附上此代码：</li>
+</ul>
 
 <pre><code class="language-C++">#include&lt;bits/stdc++.h&gt;
-#define ll long long
-const int P=1e9+7;
 using namespace std;
-ll fac[300005],inv[300005],n,m;
-void input(){
-	fac[0]=fac[1]=inv[1]=1;
-	for(int i=2;i&lt;=n*m;i++){
-		fac[i]=(fac[i-1]*i)%P;
-		inv[i]=(P-P/i)*inv[P%i]%P;
+struct node {
+	string name;
+	int en,co;
+} a[20];
+int bin[(1&lt;&lt;15)+5],dp[20][(1&lt;&lt;15)+5],fa[20][(1&lt;&lt;15)+5];
+void print(int x,int f) {
+	if(fa[x][f]==x) {
+		cout&lt;&lt;a[x].name&lt;&lt;endl;
+		return;
 	}
+	print(fa[x][f],f^(1&lt;&lt;(x-1)));
+	cout&lt;&lt;a[x].name&lt;&lt;endl;
 }
 int main() {
-	scanf("%d%d",&amp;n,&amp;m);
-	input();
-	ll ans=fac[n*m];
-	for(int i=1;i&lt;=n;i++)
-	for(int j=1;j&lt;=m;j++){
-		ans=(ans*inv[i+j-1])%P;
+	for(int i=0; i&lt;=15; i++)bin[1&lt;&lt;i]=i+1;
+	int T;
+	scanf("%d",&amp;T);
+	while(T--) {
+		for(int i=1; i&lt;=15; i++)
+			for(int j=0; j&lt;(1&lt;&lt;15); j++)fa[i][j]=i;
+		int n;
+		scanf("%d",&amp;n);
+		for(int i=1; i&lt;=n; i++) {
+			cin&gt;&gt;a[i].name;
+			scanf("%d%d",&amp;a[i].en,&amp;a[i].co);
+		}
+		for(int i=1; i&lt;=n; i++)
+			for(int j=0; j&lt;(1&lt;&lt;n); j++)dp[i][j]=1e9;
+		for(int i=1; i&lt;=n; i++)dp[i][1&lt;&lt;(i-1)]=max(0,a[i].co-a[i].en);
+		for(int j=0; j&lt;(1&lt;&lt;n); j++) {
+			for(int i=1; i&lt;=n; i++) {
+				for(int k=1; k&lt;=n; k++) {
+					if(((1&lt;&lt;(k-1))&amp;j)!=0||((1&lt;&lt;(i-1)&amp;j))==0||i==k)continue;
+					int t=j,cnt=0;
+					while(t) {
+						int p=t&amp;-t;
+						t-=p;
+						cnt+=a[bin[p]].co;
+					}
+					if(dp[k][j|(1&lt;&lt;(k-1))]&gt;dp[i][j]+max(0,cnt+a[k].co-a[k].en)) {
+						dp[k][j|(1&lt;&lt;(k-1))]=dp[i][j]+max(0,cnt+a[k].co-a[k].en);
+						fa[k][j|(1&lt;&lt;(k-1))]=i;
+					} else if(dp[k][j|(1&lt;&lt;(k-1))]==dp[i][j]+max(0,cnt+a[k].co-a[k].en)) {
+						fa[k][j|(1&lt;&lt;(k-1))]=max(fa[k][j|(1&lt;&lt;(k-1))],i);
+					}
+				}
+			}
+		}
+		int v,mi=1e9;
+		for(int i=1; i&lt;=n; i++) {
+			if(dp[i][(1&lt;&lt;n)-1]&lt;mi)mi=dp[v=i][(1&lt;&lt;n)-1];
+			else if(dp[i][(1&lt;&lt;n)-1]==mi)v=max(v,i);
+		}
+		printf("%d\n",mi);
+		print(v,(1&lt;&lt;n)-1);
 	}
-	printf("%d",ans);
 	return 0;
 }
 </code></pre>
 
-<h4 id="以为这题就这么结束了吗题是a了然而还要拓展一个叫卡特兰数的东西">以为这题就这么结束了吗？题是A了，然而还要拓展一个叫==卡特兰数==的东西。</h4>
+<hr />
 
-<p>疯狂转链接中：</p>
+<h2 id="以下是正解">以下是正解：</h2>
 
-<blockquote>
-  <p><a href="https://www.cnblogs.com/code-painter/p/4417354.html">卡特兰数初步学习(注意这里的证明)</a></p>
-</blockquote>
+<p>  用dfs进行搜索，对于每种选择方案，枚举还未被选择的任务序号，查找最小的扣分数，记录，并即使更新当前状态下的下一步选择。</p>
 
-<blockquote>
-  <p><a href="https://blog.csdn.net/wu_tongtong/article/details/78161211">这也是卡特兰数的初步</a></p>
-</blockquote>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include&lt;bits/stdc++.h&gt;
+#define oo 0x7f7f7f7f
+using namespace std;
+int n,en[20],co[20],bin[(1&lt;&lt;15)+5],mx,u[(1&lt;&lt;15)+5],cho[(1&lt;&lt;15)+5],dp[(1&lt;&lt;15)+5];
+char name[20][105];
+int dfs(int x) {
+	if(dp[x]!=oo)return dp[x];
+	int ans=oo,as=0;
+	for(int i=0; i&lt;n; i++) {
+		if((x&amp;(1&lt;&lt;i)))continue;
+		int res=dfs(x|(1&lt;&lt;i));
+		if(u[x]+co[i]&gt;en[i])
+			res+=u[x]+co[i]-en[i];
+		if(ans&gt;res)as=i,ans=res;//由于输入数据已按字典序排好，所以不用考虑ans==res时是否需要换as 
+		 
+	}
+	cho[x]=as;
+	return dp[x]=ans;
+}
+int main() {
+	for(int i=0; i&lt;=15; i++)bin[1&lt;&lt;i]=i;
+	int T;
+	scanf("%d",&amp;T);
+	while(T--) {
+		scanf("%d",&amp;n);
+		for(int i=0; i&lt;n; i++)scanf("%s%d%d",name[i],&amp;en[i],&amp;co[i]);
+		mx=(1&lt;&lt;n)-1;
+		for(int i=1; i&lt;=mx; i++)u[i]=u[i&amp;i-1]+co[bin[i&amp;-i]];//预处理每种情况的花费；
+		//i&amp;i-1即去掉i二进制的最后一位1 
+		memset(dp,oo,sizeof(dp));
+		dp[mx]=0;
+		printf("%d\n",dfs(0));
+		int now=0;
+		while(now!=mx){
+			printf("%s\n",name[cho[now]]);
+			now|=(1&lt;&lt;cho[now]);
+		}
+	}
+	return 0;
+}
+</code></pre></div></div>
 
-<blockquote>
-  <p><a href="https://www.cnblogs.com/five20/p/8530535.html">这是卡特兰数和杨氏矩阵的关联</a></p>
-
-  <p>实际上卖奶茶(只有1，2元)的实质是个进出栈问题，对于n个只有1元钱的人，2元钱的就是他们的出栈，实际上就是考虑他们的出栈顺序。</p>
-</blockquote>
 
           <script>
             var idcomments_acct = '4e68ed3635838eee1563143fe75435eb';
