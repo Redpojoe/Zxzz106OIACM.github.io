@@ -243,16 +243,19 @@ n&lt;=80000。</p>
           <div id="gitmentContainer"></div>
           <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
           <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-          <script>
-              var gitment = new Gitment({
-                    owner: 'Zxzz106OIACM',
-                    repo: 'Zxzz106OIACM.github.io',
-                    oauth: {
-                        client_id: '3b91957561ed1e89c973',
-                        client_secret: '8a61247a1a9fca78ed9addf0cffc27f49a131a10',
-                    },
-              });
-              gitment.render('gitmentContainer');
+            <div id="container"></div>
+            <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+            <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+            <script>
+            var gitment = new Gitment({
+              owner: 'Zxzz106',
+              repo: 'Zxzz106OIACM.github.io',
+              oauth: {
+                  client_id: '3b91957561ed1e89c973',
+                  client_secret: '8a61247a1a9fca78ed9addf0cffc27f49a131a10',
+              },
+            })
+            gitment.render('container')
           </script>
         </section>
 
