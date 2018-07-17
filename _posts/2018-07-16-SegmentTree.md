@@ -20,7 +20,7 @@ tags: [模板,线段树]
 
 #### 单点修改，区间查询
 
-```cpp
+```C++
 struct node {
     int L, R, sum;
 } tree[M << 2];
@@ -63,7 +63,7 @@ int Query(int L, int R, int p) {
 
 #### 区间修改，区间查询
 
-```cpp
+```C++
 #include<stdio.h>
 #include<string.h>
 #define M 100005

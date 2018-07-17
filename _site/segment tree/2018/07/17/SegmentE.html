@@ -90,27 +90,27 @@
 
 <p>结构体</p>
 
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">node</span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">L</span><span class="p">,</span><span class="n">R</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">max</span><span class="p">;</span>
-<span class="p">}</span><span class="n">tree</span><span class="p">[</span><span class="n">M</span><span class="o">&lt;&lt;</span><span class="mi">2</span><span class="p">];</span>
-</code></pre></div></div>
+<pre><code class="language-C++">struct node{
+    int L,R;
+    int max;
+}tree[M&lt;&lt;2];
+</code></pre>
 
 <p> 其中max表示区间内有最多空位那一行的空位长度。对每张海报，若左子树满足则查询左子树，否则查询右子树</p>
 
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">Query</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">L</span><span class="o">==</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">R</span><span class="p">)</span> <span class="p">{</span>
-		<span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">L</span><span class="p">);</span>
-		<span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">max</span><span class="o">-=</span><span class="n">x</span><span class="p">;</span>
-		<span class="k">return</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">].</span><span class="n">max</span><span class="p">)</span>
-		<span class="n">Query</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">);</span>
-	<span class="k">else</span>
-		<span class="n">Query</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">p</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">);</span>
-	<span class="n">up</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
+<pre><code class="language-C++">void Query(int x,int p) {
+	if(tree[p].L==tree[p].R) {
+		printf("%d\n",tree[p].L);
+		tree[p].max-=x;
+		return;
+	}
+	if(x&lt;=tree[p&lt;&lt;1].max)
+		Query(x,p&lt;&lt;1);
+	else
+		Query(x,p&lt;&lt;1|1);
+	up(p);
+}
+</code></pre>
 
 <blockquote>
   <p>其实如果想对线段树查询的对象其余的都是套路了</p>

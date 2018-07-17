@@ -103,39 +103,39 @@
   </li>
 </ul>
 
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;stdio.h&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">100005</span><span class="p">],</span><span class="n">stk</span><span class="p">[</span><span class="mi">100005</span><span class="p">],</span><span class="n">l</span><span class="p">[</span><span class="mi">100005</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">100005</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
-	<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">)){</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">break</span><span class="p">;</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-		<span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
-		<span class="kt">int</span> <span class="n">top</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-		<span class="n">stk</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-			<span class="k">while</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">stk</span><span class="p">[</span><span class="n">top</span><span class="p">]]</span><span class="o">&gt;=</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="n">top</span><span class="o">--</span><span class="p">;</span>
-			<span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">stk</span><span class="p">[</span><span class="n">top</span><span class="p">];</span>
-			<span class="n">stk</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
-		<span class="p">}</span>
-		<span class="n">top</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-		<span class="n">stk</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">]</span><span class="o">=</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">){</span>
-			<span class="k">while</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">stk</span><span class="p">[</span><span class="n">top</span><span class="p">]]</span><span class="o">&gt;=</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="n">top</span><span class="o">--</span><span class="p">;</span>
-			<span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">stk</span><span class="p">[</span><span class="n">top</span><span class="p">];</span>
-			<span class="n">stk</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
-		<span class="p">}</span>
-		<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-			<span class="kt">long</span> <span class="kt">long</span> <span class="n">k</span><span class="o">=</span><span class="mi">1ll</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-			<span class="k">if</span><span class="p">(</span><span class="n">ans</span><span class="o">&lt;</span><span class="n">k</span><span class="p">)</span><span class="n">ans</span><span class="o">=</span><span class="n">k</span><span class="p">;</span>
-		<span class="p">}</span>
-		<span class="n">printf</span><span class="p">(</span><span class="s">"%lld</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>	
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+<pre><code class="language-C++">#include&lt;stdio.h&gt;
+using namespace std;
+int a[100005],stk[100005],l[100005],r[100005];
+int main(){
+	int n;
+	while(scanf("%d",&amp;n)){
+		if(n==0)break;
+		for(int i=1;i&lt;=n;i++)scanf("%d",&amp;a[i]);
+		a[0]=a[n+1]=-1;
+		int top=0;
+		stk[++top]=0;
+		for(int i=1;i&lt;=n;i++){
+			while(a[stk[top]]&gt;=a[i])top--;
+			l[i]=stk[top];
+			stk[++top]=i;
+		}
+		top=0;
+		stk[++top]=n+1;
+		for(int i=n;i&gt;=1;i--){
+			while(a[stk[top]]&gt;=a[i])top--;
+			r[i]=stk[top];
+			stk[++top]=i;
+		}
+		long long ans=0;
+		for(int i=1;i&lt;=n;i++){
+			long long k=1ll*a[i]*(r[i]-l[i]-1);
+			if(ans&lt;k)ans=k;
+		}
+		printf("%lld\n",ans);	
+	}
+	return 0;
+}
+</code></pre>
 
           <script>
             var idcomments_acct = '4e68ed3635838eee1563143fe75435eb';

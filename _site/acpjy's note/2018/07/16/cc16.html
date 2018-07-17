@@ -121,49 +121,49 @@
   </li>
 </ul>
 
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;cstdio&gt;
+<pre><code class="language-C++">#include&lt;cstdio&gt;
 #define M 10000005
 #define mod 1000000007
 #define ll long long
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">cnt</span><span class="p">[</span><span class="n">M</span><span class="p">],</span><span class="n">l</span><span class="p">[</span><span class="n">M</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="n">M</span><span class="p">],</span><span class="n">A</span><span class="p">[</span><span class="n">M</span><span class="p">],</span><span class="n">B</span><span class="p">[</span><span class="n">M</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">p</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">Sort</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">M</span><span class="o">-</span><span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">cnt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="n">cnt</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span><span class="n">B</span><span class="p">[</span><span class="n">cnt</span><span class="p">[</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">--</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="n">del</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-	<span class="kt">int</span> <span class="n">lx</span><span class="o">=</span><span class="n">l</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">rx</span><span class="o">=</span><span class="n">r</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
-	<span class="n">r</span><span class="p">[</span><span class="n">lx</span><span class="p">]</span><span class="o">=</span><span class="n">rx</span><span class="p">;</span>
-	<span class="n">l</span><span class="p">[</span><span class="n">rx</span><span class="p">]</span><span class="o">=</span><span class="n">lx</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d%d%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span><span class="o">&amp;</span><span class="n">b</span><span class="p">,</span><span class="o">&amp;</span><span class="n">p</span><span class="p">);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-		<span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="mi">1ll</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">%</span><span class="n">p</span><span class="p">;</span>
-		<span class="n">cnt</span><span class="p">[</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">++</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="n">Sort</span><span class="p">();</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-	<span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">r</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-	<span class="n">ll</span> <span class="n">ans</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		<span class="kt">int</span> <span class="n">p</span><span class="o">=</span><span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-		<span class="kt">int</span> <span class="n">l1</span><span class="o">=</span><span class="n">l</span><span class="p">[</span><span class="n">p</span><span class="p">],</span><span class="n">r1</span><span class="o">=</span><span class="n">r</span><span class="p">[</span><span class="n">p</span><span class="p">];</span>
-		<span class="kt">int</span> <span class="n">l2</span><span class="o">=</span><span class="n">l</span><span class="p">[</span><span class="n">l1</span><span class="p">],</span><span class="n">r2</span><span class="o">=</span><span class="n">r</span><span class="p">[</span><span class="n">r1</span><span class="p">];</span>
-		<span class="n">ll</span> <span class="n">k1</span><span class="o">=</span><span class="mi">1ll</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">l1</span><span class="p">]</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-		<span class="n">ll</span> <span class="n">k2</span><span class="o">=</span><span class="mi">1ll</span><span class="o">*</span><span class="p">(</span><span class="n">l1</span><span class="o">-</span><span class="n">l2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">r1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span><span class="n">ans</span><span class="o">=</span><span class="p">(</span><span class="n">ans</span><span class="o">+</span><span class="n">k1</span><span class="o">*</span><span class="n">k2</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-		<span class="n">k1</span><span class="o">=</span><span class="mi">1ll</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">r1</span><span class="p">]</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-		<span class="n">k2</span><span class="o">=</span><span class="mi">1ll</span><span class="o">*</span><span class="p">(</span><span class="n">r2</span><span class="o">-</span><span class="n">r1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">l1</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">r1</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">)</span><span class="n">ans</span><span class="o">=</span><span class="p">(</span><span class="n">ans</span><span class="o">+</span><span class="n">k1</span><span class="o">*</span><span class="n">k2</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-		<span class="n">del</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
-	<span class="p">}</span>
-	<span class="n">printf</span><span class="p">(</span><span class="s">"%lld"</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+using namespace std;
+int cnt[M],l[M],r[M],A[M],B[M];
+int n,a,b,p;
+void Sort() {
+	for(int i=1; i&lt;=M-5; i++)cnt[i]+=cnt[i-1];
+	for(int i=n; i&gt;=1; i--)B[cnt[A[i]]--]=i;
+}
+void del(int x){
+	int lx=l[x],rx=r[x];
+	r[lx]=rx;
+	l[rx]=lx;
+}
+int main() {
+	scanf("%d%d%d%d%d",&amp;n,&amp;A[0],&amp;a,&amp;b,&amp;p);
+	for(int i=1; i&lt;=n; i++) {
+		A[i]=(1ll*A[i-1]*a+b)%p;
+		cnt[A[i]]++;
+	}
+	Sort();
+	for(int i=1;i&lt;=n;i++)l[i]=i-1,r[i]=i+1;
+	l[0]=0,r[n+1]=n+1;
+	ll ans=0;
+	for(int i=1;i&lt;=n;i++){
+		int p=B[i];
+		int l1=l[p],r1=r[p];
+		int l2=l[l1],r2=r[r1];
+		ll k1=1ll*A[p]*A[l1]%mod;
+		ll k2=1ll*(l1-l2)*(r1-p)%mod;
+		if(l1)ans=(ans+k1*k2)%mod;
+		k1=1ll*A[p]*A[r1]%mod;
+		k2=1ll*(r2-r1)*(p-l1)%mod;
+		if(r1&lt;=n)ans=(ans+k1*k2)%mod;
+		del(p);
+	}
+	printf("%lld",ans);
+	return 0;
+}
 
-</code></pre></div></div>
+</code></pre>
 
 
           <script>

@@ -100,48 +100,48 @@
 
 <h2 id="ac代码">AC代码：</h2>
 
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;bits/stdc++.h&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">struct</span> <span class="n">node</span><span class="p">{</span>
-	<span class="kt">int</span> <span class="n">co</span><span class="p">,</span><span class="n">val</span><span class="p">;</span>
-<span class="p">};</span>
-<span class="n">vector</span><span class="o">&lt;</span><span class="n">node</span><span class="o">&gt;</span><span class="n">A</span><span class="p">[</span><span class="mi">15</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">dp</span><span class="p">[</span><span class="mi">15</span><span class="p">][</span><span class="mi">10005</span><span class="p">];</span>
-<span class="kt">void</span> <span class="n">check</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="n">y</span><span class="p">)</span><span class="n">x</span><span class="o">=</span><span class="n">y</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
-	<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">k</span><span class="p">;</span>
-	<span class="k">while</span><span class="p">(</span><span class="o">~</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">m</span><span class="p">,</span><span class="o">&amp;</span><span class="n">k</span><span class="p">)){</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-			<span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">;</span>
-			<span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span><span class="o">&amp;</span><span class="n">b</span><span class="p">,</span><span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
-			<span class="n">A</span><span class="p">[</span><span class="n">a</span><span class="p">].</span><span class="n">push_back</span><span class="p">((</span><span class="n">node</span><span class="p">){</span>
-				<span class="n">b</span><span class="p">,</span><span class="n">c</span>
-			<span class="p">});</span>
-		<span class="p">}</span>
-		<span class="n">memset</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dp</span><span class="p">));</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">k</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
-				<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="o">=</span><span class="n">m</span><span class="p">;</span><span class="n">p</span><span class="o">&gt;=</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">co</span><span class="p">;</span><span class="n">p</span><span class="o">--</span><span class="p">){</span>
-					<span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">p</span><span class="o">-</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">co</span><span class="p">])</span><span class="n">check</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">p</span><span class="p">],</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">p</span><span class="o">-</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">co</span><span class="p">]</span><span class="o">+</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">val</span><span class="p">);</span>
-					<span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">p</span><span class="o">-</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">co</span><span class="p">])</span><span class="n">check</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">p</span><span class="p">],</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">p</span><span class="o">-</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">co</span><span class="p">]</span><span class="o">+</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">val</span><span class="p">);</span>
-					<span class="c1">//注意这个顺序，先更新i，再更新i-1</span>
-					<span class="c1">//因为如果先算i-1，更新了dp[i][p],那么如果A[i][j].co==0</span>
-					<span class="c1">//在更新dp[i][p]时又算了一遍，A[i][j].val加了两次</span>
-					<span class="c1">//而现在这个顺序就不会</span>
-					<span class="c1">//当然也可以用tmp先记录dp[i][j]的值，效果也相同 </span>
-				<span class="p">}</span>
-			<span class="p">}</span>
-		<span class="p">}</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">m</span><span class="p">]</span><span class="o">==-</span><span class="mi">1</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"Impossible</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-		<span class="k">else</span> <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">dp</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">m</span><span class="p">]);</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">k</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">clear</span><span class="p">();</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+<pre><code class="language-C++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+struct node{
+	int co,val;
+};
+vector&lt;node&gt;A[15];
+int dp[15][10005];
+void check(int &amp;x,int y){
+	if(x&lt;y)x=y;
+}
+int main(){
+	int n,m,k;
+	while(~scanf("%d%d%d",&amp;n,&amp;m,&amp;k)){
+		for(int i=1;i&lt;=n;i++){
+			int a,b,c;
+			scanf("%d%d%d",&amp;a,&amp;b,&amp;c);
+			A[a].push_back((node){
+				b,c
+			});
+		}
+		memset(dp,-1,sizeof(dp));
+		for(int i=0;i&lt;=m;i++)dp[0][i]=0;
+		for(int i=1;i&lt;=k;i++){
+			for(int j=0;j&lt;A[i].size();j++){
+				for(int p=m;p&gt;=A[i][j].co;p--){
+					if(~dp[i][p-A[i][j].co])check(dp[i][p],dp[i][p-A[i][j].co]+A[i][j].val);
+					if(~dp[i-1][p-A[i][j].co])check(dp[i][p],dp[i-1][p-A[i][j].co]+A[i][j].val);
+					//注意这个顺序，先更新i，再更新i-1
+					//因为如果先算i-1，更新了dp[i][p],那么如果A[i][j].co==0
+					//在更新dp[i][p]时又算了一遍，A[i][j].val加了两次
+					//而现在这个顺序就不会
+					//当然也可以用tmp先记录dp[i][j]的值，效果也相同 
+				}
+			}
+		}
+		if(dp[k][m]==-1)printf("Impossible\n");
+		else printf("%d\n",dp[k][m]);
+		for(int i=1;i&lt;=k;i++)A[i].clear();
+	}
+	return 0;
+}
+</code></pre>
 
           <script>
             var idcomments_acct = '4e68ed3635838eee1563143fe75435eb';
