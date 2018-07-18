@@ -81,9 +81,11 @@
 <hr />
 
 <h2 id="题目大意">题目大意：</h2>
-<p>&lt;font color=brown&gt;给你n棵树，每棵树第一天有ai的果实，每天增长值bi你要在mmm天内每天砍一棵树（砍下即得到全部果实值）求mmm天内得到最大果实值。&lt;/font&gt;</p>
 
-<p>Sample Input</p>
+<font color="brown">给你n棵树，每棵树第一天有ai的果实，每天增长值bi你要在mmm天内每天砍一棵树（砍下即得到全部果实值）求mmm天内得到最大果实值。  
+</font>
+<p><br />
+Sample Input</p>
 
 <p>2<br />
 2 1<br />
@@ -100,9 +102,9 @@
 
 <h2 id="思路">思路：</h2>
 
-<ul class="task-list">
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>这道题中，每棵树都有成长值，所以我们可以让b较小而a较大的树排在前面，先取。排序以后，从1到n每棵树i，考虑他们在第几天被砍，dp【j】=dp【j-1】+val【i】【j】。此时的dp【j-1】只包含前i-1颗树的情况。</strong></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>排序的主要目的是，确保可增长的值较小的树先被砍。如果现在不砍b较小的树，而是过一会儿再砍，那得到的结果肯定不如先砍b小的再砍大的，这肯定是亏了。</strong>
+<ul>
+  <li><strong>这道题中，每棵树都有成长值，所以我们可以让b较小而a较大的树排在前面，先取。排序以后，从1到n每棵树i，考虑他们在第几天被砍，dp[j]=dp[j-1]+val[i][j]。此时的dp[j-1]只包含前i-1颗树的情况。</strong></li>
+  <li><strong>排序的主要目的是，确保可增长的值较小的树先被砍。如果现在不砍b较小的树，而是过一会儿再砍，那得到的结果肯定不如先砍b小的再砍大的，这肯定是亏了。</strong>
     <h2 id="ac代码">AC代码</h2>
   </li>
 </ul>
@@ -152,7 +154,7 @@ int main() {
 
 </code></pre>
 
-          <p align="right">143 words</p>
+          <p align="right">135 words</p>
           <p align="right" id="show"></p>
           <script>
             var idcomments_acct = '4e68ed3635838eee1563143fe75435eb';
