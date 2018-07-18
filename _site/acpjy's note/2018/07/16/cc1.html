@@ -7,6 +7,28 @@
     <link rel="stylesheet" href="/assets/css/style.css?v=" media="screen" type="text/css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print" type="text/css">
     <link rel="icon" href="https://avatars1.githubusercontent.com/u/21288752?s=40&amp;v=4" type="image/x-icon">
+<script type="text/javascript"> 
+  window.onload = function() {  
+    var show = document.getElementById("show");  
+    setInterval(function() {   
+      var time = new Date();   // 程序计时的月从0开始取值后+1   
+      var m = time.getMonth() + 1;   
+      if(m < 10) m ="0" + m;
+      var d = time.getDate();   
+      if(d < 10) d ="0" + d;
+      var h = time.getHours();   
+      if(h < 10) h ="0" + h;
+      var min = time.getMinutes();   
+      if(min < 10)min ="0" + min;
+      var sec = time.getSeconds();   
+      if(sec < 10)sec ="0" + sec;
+      var t = time.getFullYear() + "-" + m + "-"     
+      + d + " " + h + ":"     
+      + min + ":" + sec;   
+      show.innerHTML = t;  
+    }, 1000); 
+};
+</script>
     <style type="text/css">
       a{text-decoration: none; padding: 10PX; color:#6633FF}
       a:hover{ color:#6633FF;}
@@ -135,7 +157,7 @@ int main() {
 </code></pre>
 
           <p align="right">172 words</p>
-          <p align="right">Wed, 18 Jul 2018 10:54:19 +0800</p>
+          <p align="right" id="show"></p>
           <script>
             var idcomments_acct = '4e68ed3635838eee1563143fe75435eb';
             var idcomments_post_id;
