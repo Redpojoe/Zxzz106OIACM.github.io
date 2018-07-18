@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/assets/css/style.css?v=" media="screen" type="text/css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print" type="text/css">
     <link rel="icon" href="https://avatars1.githubusercontent.com/u/21288752?s=40&amp;v=4" type="image/x-icon">
-    <!--<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
     <style type="text/css">
       a{text-decoration: none; padding: 10PX; color:#6633FF}
       a:hover{ color:#6633FF;}
@@ -93,7 +92,7 @@
 <p>++==<strong>Sample Output</strong>==++<br />
 32</p>
 
-<h6 id="-样例解释前三天走1-4-5后两天走1-3-5这样总成本为2233221032">&gt; 样例解释：前三天走1-4-5，后两天走1-3-5，这样总成本为<script type="math/tex">(2+2)*3+(3+2)*2+10=32</script>。</h6>
+<h6 id="-样例解释前三天走1-4-5后两天走1-3-5这样总成本为2233221032">&gt; 样例解释：前三天走1-4-5，后两天走1-3-5，这样总成本为(2+2)<em>3+(3+2)</em>2+10=32。</h6>
 
 <hr />
 
@@ -104,13 +103,17 @@
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>此题有状压dp等一大堆写法，毕竟是个比较杂的题目，此处先介绍一种代码量较小的算法：</strong></li>
 </ul>
 
-<h1 id="弗洛伊德floyddp">弗洛伊德（<script type="math/tex">floyd</script>）+<script type="math/tex">dp</script></h1>
+<h1 id="弗洛伊德floyddp">弗洛伊德（floyd）+dp</h1>
 <p><strong>其实本题的核心思维就是最短路+dp，只不过此处用了代码量较小的弗洛伊德算法。</strong></p>
 
 <ul class="task-list">
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>那么怎么做呢？将每个时间段内的最少花费求出来，对于在这一时间段封闭的点，floyd就不经过它。然后以时间为阶段，dp到第几天的最小花费。</strong></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>最多100天，也就是最多有100^2个时间段，每个时间段最多要floyd25个点，要25的3次方。</strong>
-<script type="math/tex">O = 100^2*25^3 = 156250000</script></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>最多100天，也就是最多有100^2个时间段，每个时间段最多要floyd25个点，要25的3次方。</strong></li>
+</ul>
+
+<p>O = 100^2*25^3 = 156250000</p>
+
+<ul class="task-list">
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>不会超吧。</strong></li>
 </ul>
 
@@ -171,8 +174,8 @@ int main() {
 </code></pre>
 
 
-          <p align="right">262 words</p>
-          <p align="right">Wed, 18 Jul 2018 10:17:43 +0800</p>
+          <p align="right">261 words</p>
+          <p align="right">Wed, 18 Jul 2018 10:54:19 +0800</p>
           <script>
             var idcomments_acct = '4e68ed3635838eee1563143fe75435eb';
             var idcomments_post_id;
