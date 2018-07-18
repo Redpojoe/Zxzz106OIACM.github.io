@@ -40,19 +40,19 @@
     <![endif]-->
 
 <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Math Magic | GYS’s Blog for OI/ACM</title>
+<title>离散化模板 | GYS’s Blog for OI/ACM</title>
 <meta name="generator" content="Jekyll v3.8.3" />
-<meta property="og:title" content="Math Magic" />
+<meta property="og:title" content="离散化模板" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Math Magic &lt;p align=&quot;right&quot;&gt;来源：ZOJ-3662&lt;/p&gt;" />
-<meta property="og:description" content="Math Magic &lt;p align=&quot;right&quot;&gt;来源：ZOJ-3662&lt;/p&gt;" />
-<link rel="canonical" href="http://0.0.0.0:4000/acpjy's%20note/2018/07/16/cc11.html" />
-<meta property="og:url" content="http://0.0.0.0:4000/acpjy's%20note/2018/07/16/cc11.html" />
+<meta name="description" content="离散化模板" />
+<meta property="og:description" content="离散化模板" />
+<link rel="canonical" href="http://0.0.0.0:4000/template/2018/01/01/Discretization.html" />
+<meta property="og:url" content="http://0.0.0.0:4000/template/2018/01/01/Discretization.html" />
 <meta property="og:site_name" content="GYS’s Blog for OI/ACM" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2018-07-16T00:00:00+08:00" />
+<meta property="article:published_time" content="2018-01-01T00:00:00+08:00" />
 <script type="application/ld+json">
-{"description":"Math Magic &lt;p align=&quot;right&quot;&gt;来源：ZOJ-3662&lt;/p&gt;","@type":"BlogPosting","url":"http://0.0.0.0:4000/acpjy's%20note/2018/07/16/cc11.html","headline":"Math Magic","dateModified":"2018-07-16T00:00:00+08:00","datePublished":"2018-07-16T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/acpjy's%20note/2018/07/16/cc11.html"},"@context":"http://schema.org"}</script>
+{"description":"离散化模板","@type":"BlogPosting","url":"http://0.0.0.0:4000/template/2018/01/01/Discretization.html","headline":"离散化模板","dateModified":"2018-01-01T00:00:00+08:00","datePublished":"2018-01-01T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/template/2018/01/01/Discretization.html"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -71,116 +71,59 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h1 id="math-magic">Math Magic</h1>
-<h4 id="p-alignright来源zoj-3662p">&lt;p align="right"&gt;来源：ZOJ-3662&lt;/p&gt;</h4>
+          <h1 id="离散化模板">离散化模板</h1>
 
-<hr />
+<h2 id="定义">定义</h2>
+<blockquote>
+  <p> 离散化，把无限空间中有限的个体映射到有限的空间中去，以此提高算法的时空效率。<br />
+ 通俗的说，离散化是在不改变数据相对大小的条件下，对数据进行相应的缩小。</p>
+</blockquote>
 
-<h2 id="题目大意">题目大意：</h2>
-<h5 id="有k个正数求有多少种方案满足">有K个正数，求有多少种方案满足：</h5>
+<h2 id="流程">流程</h2>
+<ol>
+  <li>1.排序</li>
+  <li>2.删除重复元素</li>
+  <li>3.索引元素离散化后对应的值</li>
+</ol>
 
-<script type="math/tex; mode=display">SUM(A_1,A_2,A_3,\cdots,A_K)=N</script>
+<h2 id="代码">代码</h2>
 
-<script type="math/tex; mode=display">LCM(A_1,A_2,A_3,\cdots,A_K)=M</script>
+<p>一种是通过STL实现的，适用于有重序列</p>
 
-<p>数据范围： <script type="math/tex">1 \le K \le 10^2, 1\le N,M \le 10^3</script></p>
+<pre><code class="language-C++">int a[M], t[M];
+int n;
+scanf("%d",&amp;n);
+for(int i=1; i&lt;=n; i++)
+    scanf("%d",a[i]),t[i]=a[i];
+sort(t+1,t+n+1);
+m=unique(t+1,t+1+n)-t-1;//m为不重复的元素的个数，若需保留则不需要这句话
+for(int i=1; i&lt;=n; i++)
+    a[i]=lower_bound(t+1,t+1+m,a[i])-t;
+</code></pre>
 
-<hr />
+<p>另一种区别不大，适用于无重序列，效率较低</p>
 
-<h4 id="sample-input">Sample Input</h4>
-
-<p>4 2 2<br />
-3 2 2</p>
-
-<h4 id="sample-output">Sample Output</h4>
-
-<p>1<br />
-2</p>
-
-<h4 id="hint">Hint</h4>
-
-<h5 id="the-first-test-case-the-only-solution-is-2-2"><em>The first test case: the only solution is (2, 2).</em></h5>
-
-<h5 id="the-second-test-case-the-solution-are-1-2-and-2-1"><em>The second test case: the solution are (1, 2) and (2, 1).</em></h5>
-
-<hr />
-
-<h2 id="思路">思路：</h2>
-<ul>
-  <li>
-    <h5 id="从hint来看序列a是可以重复并且有序的">从hint来看，序列a是可以重复并且有序的。</h5>
-  </li>
-  <li>
-    <h5 id="序列中的lcm问题如果数据范围不是太大的话就先把lcm预处理出来而">序列中的<code class="highlighter-rouge">$lcm$</code>问题，如果数据范围不是太大的话，就先把lcm预处理出来。而</h5>
-  </li>
-</ul>
-
-<p>lcm(i,j) = \frac{i\times j}{gcd(i,j)}</p>
-
-<ul>
-  <li>
-    <h5 id="并且gcdij的时间复杂度为lognn为minij所以本题中我们可以预处理出任意两数的lcm">并且gcd(i,j)的时间复杂度为(logn)(n为min(i,j)),所以本题中我们可以预处理出任意两数的lcm。</h5>
-  </li>
-  <li>
-    <h5 id="如何划分阶段呢因为同时要求所有数之和与lcm不妨以他们各作一维我们还可以将选到第几个数作为一维但这样显然内存超限所以用滚动数组优化">如何划分阶段呢？因为同时要求所有数之和与lcm，不妨以他们各作一维。我们还可以将选到第几个数作为一维。但这样，显然内存超限，所以用滚动数组优化。</h5>
-  </li>
-  <li>
-    <h4 id="对于这些求方案数的dp问题一定要预先准备好初始状态如本题中dpcur011这一步骤容易忘记也易错却必不可少一定要慎重考虑">对于这些求方案数的dp问题，一定要预先准备好初始状态，如本题中dp[cur][0][1]=1。这一步骤容易忘记，也易错，却必不可少，一定要慎重考虑。</h4>
-  </li>
-  <li>
-    <h5 id="讲的也差不多了下面上代码">讲的也差不多了，下面上代码。</h5>
-  </li>
-</ul>
-
-<h2 id="ac代码">AC代码：</h2>
-
-<pre><code class="language-C++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-const int P=1e9+7;
-vector&lt;int&gt;son[1005];
-int lcm[1005][1005],dp[2][1005][1005];//dp[i][j][k],前i个，和为j，lcm为k
-int gcd(int a,int b) {
-	return b==0?a:gcd(b,a%b);
+<pre><code class="language-C++">struct node {
+    int x, idx;
+    bool operator &lt; (const node &amp;rhs) const {
+        return x &lt; rhs.x;
+    }
+};
+node dcr[M];
+int A[M];
+int n;
+scanf("%d",&amp;n);
+for(int i = 1; i &lt;= n; i++) {
+    scanf("%d", &amp;dcr[i].x);
+    dcr[i].idx = i;
 }
-void input() {
-	for(int i=1; i&lt;=1000; i++) {
-		for(int j=i; j&lt;=1000; j+=i)son[j].push_back(i);
-	}
-	for(int i=1; i&lt;=1000; i++)
-		for(int j=i; j&lt;=1000; j++) {
-			if(i==1||j==1)lcm[i][j]=max(i,j);
-			lcm[i][j]=lcm[j][i]=i*j/gcd(i,j);
-		}
-}
-int main() {
-	input();
-	int n,m,k;
-	while(~scanf("%d%d%d",&amp;n,&amp;m,&amp;k)) {
-		bool cur=0;
-		memset(dp,0,sizeof(dp));
-		dp[cur][0][1]=1;
-		for(int i=1; i&lt;=k; i++) {
-			cur^=1;
-			memset(dp[cur],0,sizeof(dp[cur]));
-			for(int j=i-1; j&lt;=n; j++) {
-				for(int p=0; p&lt;son[m].size(); p++) {
-					if(!dp[cur^1][j][son[m][p]])continue;
-					for(int q=0; q&lt;son[m].size(); q++) {
-						if(j+son[m][q]&gt;n)continue;
-						int l=lcm[son[m][q]][son[m][p]];
-						if(l&gt;m)continue;
-						dp[cur][j+son[m][q]][l]=(dp[cur][j+son[m][q]][l]+dp[cur^1][j][son[m][p]])%P;
-					}
-				}
-			}
-		}
-		printf("%d\n",dp[cur][n][m]);
-	}
-	return 0;
+sort(dcr+1,dcr+n+1);
+for(int i = 1; i &lt;= n; i++) {
+    A[dcr[i].idx] = i;
 }
 </code></pre>
 
-          <p align="right">207 words</p>
+          <p align="right">98 words</p>
           <p align="right" id="show"></p>
           <script>
             var idcomments_acct = '4e68ed3635838eee1563143fe75435eb';
