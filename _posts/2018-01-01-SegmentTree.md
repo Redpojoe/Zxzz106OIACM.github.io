@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "线段树模板"
-date: 2018-07-16
+date: 2018-01-01
 category: [Template,Segment Tree]
 tags: [模板,线段树]
 ---
